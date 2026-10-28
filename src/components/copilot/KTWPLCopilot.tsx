@@ -67,17 +67,7 @@ export const KTWPLCopilot: React.FC<KTWPLCopilotProps> = ({
       id: 'msg-welcome',
       sender: 'assistant',
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      text: `Welcome to the KTWPL Institutional Assistant.\n\nI am pre-loaded with your active mandates, General Ledger records, SEBI compliance circulars, and treasury forecasts. Select any demo query below or ask a custom question:`,
-      citations: [
-        {
-          label: 'Master Mandate Repository',
-          source: 'KTWPL Digitized Escrow Ledger & Vault',
-        },
-      ],
-      quickActions: (role === 'admin' ? adminPrompts : investorPrompts).slice(0, 3).map(q => ({
-        label: q,
-        actionType: 'PROMPT' as const,
-      })),
+      text: `Welcome to the KTWPL Institutional Assistant.\n\nI am pre-loaded with your active mandates, General Ledger records, SEBI compliance circulars, and treasury forecasts. Select any demo query above or ask a custom question:`,
     },
   ]);
 

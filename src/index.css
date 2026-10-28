@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Softer, comfortable lighter dark tone (slate-navy) that eliminates eye stress */
+  --bg-canvas: #0F172A;
+  --bg-surface: #131E34;
+  --bg-card: #182238;
+  --bg-elevated: #222F4C;
+  --border-subtle: rgba(255, 255, 255, 0.10);
+  --border-card: rgba(255, 255, 255, 0.14);
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --gold-accent: #C6A45C;
+  --emerald-accent: #10B981;
+  --ruby-accent: #EF4444;
+}
+
+html.light, body.light, .light {
+  /* Crisp institutional light mode */
+  --bg-canvas: #F8FAFC;
+  --bg-surface: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --bg-elevated: #F1F5F9;
+  --border-subtle: #E2E8F0;
+  --border-card: #CBD5E1;
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #94A3B8;
+  --gold-accent: #B8860B;
+  --emerald-accent: #059669;
+  --ruby-accent: #DC2626;
+}
+
+@layer base {
+  body {
+    background-color: var(--bg-canvas);
+    color: var(--text-primary);
+    font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  /* Minimalist institutional scrollbars */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(148, 163, 184, 0.25);
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(148, 163, 184, 0.45);
+  }
+}
+
+/* Distinguishable card boundary */
+.institutional-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  transition: border-color 0.18s ease, transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease;
+}
+
+.institutional-card:hover {
+  border-color: rgba(198, 164, 92, 0.35);
+}
+
+/* Subtle 3D perspective transition on cards */
+.perspective-card {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease, border-color 0.2s ease;
+}
+
+.perspective-card:hover {
+  transform: perspective(1000px) translateY(-2px) rotateX(1deg);
+  box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.25);
+}
+
+/* Floating 3D AI assistant bubble animation */
+@keyframes float3D {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.35), 0 0 15px -2px rgba(198, 164, 92, 0.25);
+  }
+  50% {
+    transform: translateY(-5px) rotate(1deg);
+    box-shadow: 0 16px 30px -5px rgba(0, 0, 0, 0.4), 0 0 20px -1px rgba(198, 164, 92, 0.35);
+  }
+}
+
+.floating-bubble-3d {
+  animation: float3D 3.5s ease-in-out infinite;
+}
+
+/* Tabular numerals for financial accuracy */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}

@@ -88,7 +88,7 @@ export const FundOnboardingModal: React.FC<FundOnboardingModalProps> = ({
     >
       <form onSubmit={handleSubmit} className="space-y-5">
         {/* Step indicator */}
-        <div className="flex items-center gap-3 border-b border-white/[0.08] pb-2.5 text-xs">
+        <div className="flex items-center gap-3 border-b border-subtle pb-2.5 text-xs">
           <button
             type="button"
             onClick={() => setStep(1)}
@@ -96,11 +96,11 @@ export const FundOnboardingModal: React.FC<FundOnboardingModalProps> = ({
               step === 1 ? 'text-gold-500 border-b border-gold-500 font-medium' : 'text-ink-muted'
             }`}
           >
-            <span className="w-4 h-4 rounded bg-[#121925] border border-white/[0.08] text-ink-primary flex items-center justify-center text-[10px]">1</span>
+            <span className="w-4 h-4 rounded bg-elevated border border-subtle text-ink-primary flex items-center justify-center text-[10px]">1</span>
             <span>Mandate Parameters & PAN</span>
           </button>
 
-          <span className="text-white/[0.1]">•</span>
+          <span className="text-ink-muted/30">•</span>
 
           <button
             type="button"
@@ -109,7 +109,7 @@ export const FundOnboardingModal: React.FC<FundOnboardingModalProps> = ({
               step === 2 ? 'text-gold-500 border-b border-gold-500 font-medium' : 'text-ink-muted'
             }`}
           >
-            <span className="w-4 h-4 rounded bg-[#121925] border border-white/[0.08] text-ink-primary flex items-center justify-center text-[10px]">2</span>
+            <span className="w-4 h-4 rounded bg-elevated border border-subtle text-ink-primary flex items-center justify-center text-[10px]">2</span>
             <span>Repayment Schedule Preview</span>
           </button>
         </div>
@@ -126,13 +126,13 @@ export const FundOnboardingModal: React.FC<FundOnboardingModalProps> = ({
                   type="text"
                   value={pan}
                   onChange={e => setPan(e.target.value.toUpperCase())}
-                  className="flex-1 px-3 py-1.5 rounded-lg bg-[#0A0D14] border border-white/[0.08] text-ink-primary font-mono text-xs uppercase focus:outline-none focus:border-white/[0.2]"
+                  className="flex-1 px-3 py-1.5 rounded-lg bg-surface border border-subtle text-ink-primary font-mono text-xs uppercase focus:outline-none focus:border-gold-500/50"
                   required
                 />
                 <button
                   type="button"
                   onClick={handlePanLookup}
-                  className="px-3 py-1.5 rounded-lg bg-[#121925] hover:bg-[#172030] border border-white/[0.08] text-xs font-medium text-ink-secondary hover:text-ink-primary flex items-center gap-1.5"
+                  className="px-3 py-1.5 rounded-lg bg-elevated hover:brightness-105 border border-subtle text-xs font-medium text-ink-secondary hover:text-ink-primary flex items-center gap-1.5"
                 >
                   <Search className="w-3.5 h-3.5" />
                   <span>Verify CKYC</span>
@@ -150,7 +150,7 @@ export const FundOnboardingModal: React.FC<FundOnboardingModalProps> = ({
                   type="text"
                   value={clientName}
                   onChange={e => setClientName(e.target.value)}
-                  className="w-full px-3 py-1.5 rounded-lg bg-[#0A0D14] border border-white/[0.08] text-ink-primary text-xs focus:outline-none focus:border-white/[0.2]"
+                  className="w-full px-3 py-1.5 rounded-lg bg-surface border border-subtle text-ink-primary text-xs focus:outline-none focus:border-gold-500/50"
                   required
                 />
               </div>
@@ -163,7 +163,7 @@ export const FundOnboardingModal: React.FC<FundOnboardingModalProps> = ({
                   type="text"
                   value={phone}
                   onChange={e => setPhone(e.target.value)}
-                  className="w-full px-3 py-1.5 rounded-lg bg-[#0A0D14] border border-white/[0.08] text-ink-primary text-xs font-mono focus:outline-none focus:border-white/[0.2]"
+                  className="w-full px-3 py-1.5 rounded-lg bg-surface border border-subtle text-ink-primary text-xs font-mono focus:outline-none focus:border-gold-500/50"
                   required
                 />
               </div>
@@ -181,7 +181,7 @@ export const FundOnboardingModal: React.FC<FundOnboardingModalProps> = ({
                   step="100000"
                   value={principal}
                   onChange={e => setPrincipal(Number(e.target.value))}
-                  className="w-full px-3 py-1.5 rounded-lg bg-[#0A0D14] border border-white/[0.08] text-ink-primary font-mono text-xs focus:outline-none focus:border-white/[0.2] tabular-nums"
+                  className="w-full px-3 py-1.5 rounded-lg bg-surface border border-subtle text-ink-primary font-mono text-xs focus:outline-none focus:border-gold-500/50 tabular-nums"
                   required
                 />
               </div>
@@ -193,7 +193,7 @@ export const FundOnboardingModal: React.FC<FundOnboardingModalProps> = ({
                 <select
                   value={tenorMonths}
                   onChange={e => setTenorMonths(Number(e.target.value))}
-                  className="w-full px-3 py-1.5 rounded-lg bg-[#0A0D14] border border-white/[0.08] text-ink-primary text-xs focus:outline-none focus:border-white/[0.2]"
+                  className="w-full px-3 py-1.5 rounded-lg bg-surface border border-subtle text-ink-primary text-xs focus:outline-none focus:border-gold-500/50"
                 >
                   <option value={6}>6 Months</option>
                   <option value={12}>12 Months</option>
@@ -211,7 +211,7 @@ export const FundOnboardingModal: React.FC<FundOnboardingModalProps> = ({
                   step="0.25"
                   value={interestRate}
                   onChange={e => setInterestRate(Number(e.target.value))}
-                  className="w-full px-3 py-1.5 rounded-lg bg-[#0A0D14] border border-white/[0.08] text-ink-primary font-mono text-xs focus:outline-none focus:border-white/[0.2]"
+                  className="w-full px-3 py-1.5 rounded-lg bg-surface border border-subtle text-ink-primary font-mono text-xs focus:outline-none focus:border-gold-500/50"
                   required
                 />
               </div>
@@ -226,7 +226,7 @@ export const FundOnboardingModal: React.FC<FundOnboardingModalProps> = ({
                 <select
                   value={periodicity}
                   onChange={e => setPeriodicity(e.target.value as Periodicity)}
-                  className="w-full px-3 py-1.5 rounded-lg bg-[#0A0D14] border border-white/[0.08] text-ink-primary text-xs focus:outline-none focus:border-white/[0.2]"
+                  className="w-full px-3 py-1.5 rounded-lg bg-surface border border-subtle text-ink-primary text-xs focus:outline-none focus:border-gold-500/50"
                 >
                   <option value="MONTHLY">Monthly</option>
                   <option value="QUARTERLY">Quarterly</option>
@@ -242,7 +242,7 @@ export const FundOnboardingModal: React.FC<FundOnboardingModalProps> = ({
                   type="text"
                   value={utrNumber}
                   onChange={e => setUtrNumber(e.target.value)}
-                  className="w-full px-3 py-1.5 rounded-lg bg-[#0A0D14] border border-white/[0.08] text-ink-primary font-mono text-xs focus:outline-none focus:border-white/[0.2]"
+                  className="w-full px-3 py-1.5 rounded-lg bg-surface border border-subtle text-ink-primary font-mono text-xs focus:outline-none focus:border-gold-500/50"
                   required
                 />
               </div>
@@ -255,7 +255,7 @@ export const FundOnboardingModal: React.FC<FundOnboardingModalProps> = ({
                   type="text"
                   value={bankSource}
                   onChange={e => setBankSource(e.target.value)}
-                  className="w-full px-3 py-1.5 rounded-lg bg-[#0A0D14] border border-white/[0.08] text-ink-primary text-xs focus:outline-none focus:border-white/[0.2]"
+                  className="w-full px-3 py-1.5 rounded-lg bg-surface border border-subtle text-ink-primary text-xs focus:outline-none focus:border-gold-500/50"
                   required
                 />
               </div>
@@ -265,7 +265,7 @@ export const FundOnboardingModal: React.FC<FundOnboardingModalProps> = ({
               <button
                 type="button"
                 onClick={() => setStep(2)}
-                className="px-4 py-1.5 rounded-md bg-[#121925] hover:bg-[#172030] border border-white/[0.08] text-ink-primary text-xs font-medium flex items-center gap-1.5 transition-colors"
+                className="px-4 py-1.5 rounded-md bg-elevated hover:brightness-105 border border-subtle text-ink-primary text-xs font-medium flex items-center gap-1.5 transition-colors"
               >
                 <span>Schedule Preview</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -275,7 +275,7 @@ export const FundOnboardingModal: React.FC<FundOnboardingModalProps> = ({
         ) : (
           <div className="space-y-4">
             {/* Schedule Preview Table */}
-            <div className="p-3.5 rounded-lg bg-[#0A0D14] border border-white/[0.06] space-y-2.5">
+            <div className="p-3.5 rounded-lg bg-surface border border-subtle space-y-2.5">
               <div className="flex items-center justify-between text-xs">
                 <span className="font-medium text-ink-primary flex items-center gap-1.5">
                   <Table className="w-3.5 h-3.5 text-gold-500" />
@@ -286,9 +286,9 @@ export const FundOnboardingModal: React.FC<FundOnboardingModalProps> = ({
                 </span>
               </div>
 
-              <div className="max-h-48 overflow-y-auto border border-white/[0.04] rounded text-xs font-mono">
+              <div className="max-h-48 overflow-y-auto border border-subtle rounded text-xs font-mono">
                 <table className="w-full text-left">
-                  <thead className="bg-[#121925] text-ink-muted text-[10px] uppercase sticky top-0">
+                  <thead className="bg-elevated text-ink-muted text-[10px] uppercase sticky top-0">
                     <tr>
                       <th className="py-2 px-3">Month</th>
                       <th className="py-2 px-3 text-right">Interest</th>
@@ -296,9 +296,9 @@ export const FundOnboardingModal: React.FC<FundOnboardingModalProps> = ({
                       <th className="py-2 px-3 text-right">Cumulative Value</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-white/[0.04]">
+                  <tbody className="divide-y divide-subtle">
                     {simulation.schedule.slice(0, 12).map(row => (
-                      <tr key={row.month} className="hover:bg-white/[0.02]">
+                      <tr key={row.month} className="hover:bg-elevated/40">
                         <td className="py-1.5 px-3 text-ink-secondary">{row.monthLabel}</td>
                         <td className="py-1.5 px-3 text-right text-emerald-500">+{formatINR(row.interestEarned)}</td>
                         <td className="py-1.5 px-3 text-right text-ink-primary">
@@ -313,7 +313,7 @@ export const FundOnboardingModal: React.FC<FundOnboardingModalProps> = ({
             </div>
 
             {/* Financial Summary */}
-            <div className="grid grid-cols-3 gap-3 p-3 rounded-lg bg-[#121925] border border-white/[0.06] text-xs font-mono">
+            <div className="grid grid-cols-3 gap-3 p-3 rounded-lg bg-surface border border-subtle text-xs font-mono">
               <div>
                 <span className="text-[10px] text-ink-muted uppercase block font-sans">Principal</span>
                 <span className="font-medium text-ink-primary mt-0.5 block tabular-nums">{formatINR(principal)}</span>
@@ -329,7 +329,7 @@ export const FundOnboardingModal: React.FC<FundOnboardingModalProps> = ({
             </div>
 
             {/* Actions */}
-            <div className="flex items-center justify-between pt-2 border-t border-white/[0.08]">
+            <div className="flex items-center justify-between pt-2 border-t border-subtle">
               <button
                 type="button"
                 onClick={() => setStep(1)}

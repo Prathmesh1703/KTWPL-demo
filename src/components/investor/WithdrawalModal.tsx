@@ -100,7 +100,7 @@ export const WithdrawalModal: React.FC<WithdrawalModalProps> = ({
                 setWithdrawalAmount(ag.principalAmount / 2);
               }
             }}
-            className="w-full px-3 py-2 rounded-lg bg-[#0A0D14] border border-white/[0.08] text-ink-primary text-xs font-mono focus:outline-none focus:border-white/[0.2]"
+            className="w-full px-3 py-2 rounded-lg bg-surface border border-subtle text-ink-primary text-xs font-mono focus:outline-none focus:border-gold-500/50"
           >
             {agreements.map(ag => (
               <option key={ag.id} value={ag.id}>
@@ -117,8 +117,8 @@ export const WithdrawalModal: React.FC<WithdrawalModalProps> = ({
             onClick={() => setRequestType('PARTIAL')}
             className={`p-2.5 rounded-lg border text-left text-xs transition-colors ${
               requestType === 'PARTIAL'
-                ? 'bg-[#121925] border-gold-500/30 text-ink-primary font-medium'
-                : 'bg-[#0A0D14] border-white/[0.06] text-ink-secondary hover:text-ink-primary'
+                ? 'bg-elevated border-gold-500/40 text-ink-primary font-medium'
+                : 'bg-surface border-subtle text-ink-secondary hover:text-ink-primary'
             }`}
           >
             <div className="text-xs font-medium">Partial Redemption</div>
@@ -130,8 +130,8 @@ export const WithdrawalModal: React.FC<WithdrawalModalProps> = ({
             onClick={handleMaxAmount}
             className={`p-2.5 rounded-lg border text-left text-xs transition-colors ${
               requestType === 'FULL_REDEMPTION'
-                ? 'bg-[#121925] border-gold-500/30 text-ink-primary font-medium'
-                : 'bg-[#0A0D14] border-white/[0.06] text-ink-secondary hover:text-ink-primary'
+                ? 'bg-elevated border-gold-500/40 text-ink-primary font-medium'
+                : 'bg-surface border-subtle text-ink-secondary hover:text-ink-primary'
             }`}
           >
             <div className="text-xs font-medium">Full Liquidation</div>
@@ -159,13 +159,13 @@ export const WithdrawalModal: React.FC<WithdrawalModalProps> = ({
               step="50000"
               value={withdrawalAmount}
               onChange={e => setWithdrawalAmount(Number(e.target.value))}
-              className="w-full pl-7 pr-16 py-1.5 rounded-lg bg-[#0A0D14] border border-white/[0.08] text-ink-primary font-mono text-sm font-medium focus:outline-none focus:border-white/[0.2] tabular-nums"
+              className="w-full pl-7 pr-16 py-1.5 rounded-lg bg-surface border border-subtle text-ink-primary font-mono text-sm font-medium focus:outline-none focus:border-gold-500/50 tabular-nums"
               required
             />
             <button
               type="button"
               onClick={handleMaxAmount}
-              className="absolute right-1.5 top-1 px-2 py-1 rounded bg-[#121925] hover:bg-[#172030] text-[10px] font-mono text-ink-secondary font-medium"
+              className="absolute right-1.5 top-1 px-2 py-1 rounded bg-elevated hover:brightness-110 text-[10px] font-mono text-ink-secondary font-medium border border-subtle"
             >
               MAX
             </button>
@@ -178,7 +178,7 @@ export const WithdrawalModal: React.FC<WithdrawalModalProps> = ({
             <Building2 className="w-3.5 h-3.5 text-gold-500" />
             <span>Destination Verified Bank Account</span>
           </label>
-          <div className="p-2.5 rounded-lg bg-[#0A0D14] border border-white/[0.06] flex items-center justify-between text-xs">
+          <div className="p-2.5 rounded-lg bg-surface border border-subtle flex items-center justify-between text-xs">
             <div>
               <div className="font-medium text-ink-primary">{bankOption}</div>
               <div className="text-[10px] text-ink-muted mt-0.5 font-mono">
@@ -198,19 +198,19 @@ export const WithdrawalModal: React.FC<WithdrawalModalProps> = ({
             type="text"
             value={reason}
             onChange={e => setReason(e.target.value)}
-            className="w-full px-3 py-1.5 rounded-lg bg-[#0A0D14] border border-white/[0.08] text-xs text-ink-primary placeholder-ink-muted focus:outline-none focus:border-white/[0.2]"
+            className="w-full px-3 py-1.5 rounded-lg bg-surface border border-subtle text-xs text-ink-primary placeholder-ink-muted focus:outline-none focus:border-gold-500/50"
             required
           />
         </div>
 
         {/* Lock-in Verification Alert */}
-        <div className="p-3 rounded-lg bg-[#121925] border border-white/[0.06] text-xs text-ink-secondary">
+        <div className="p-3 rounded-lg bg-surface border border-subtle text-xs text-ink-secondary">
           <span className="font-medium text-ink-primary block mb-0.5">Seasoning Requirement Cleared:</span>
           Mandate #{selectedAgreement?.agreementNo} has seasoned past the 6-month statutory lock-in. No premature exit penalty applies.
         </div>
 
         {/* Action Buttons */}
-        <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-white/[0.08]">
+        <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-subtle">
           <button
             type="button"
             onClick={onClose}

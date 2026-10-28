@@ -31,6 +31,12 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       body.classList.add('light');
       body.classList.remove('dark');
     }
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    if (metaTheme) {
+      metaTheme.setAttribute('content', theme === 'dark' ? '#0F172A' : '#FFFFFF');
+    }
+
     localStorage.setItem('ktwpl_theme', theme);
   }, [theme]);
 

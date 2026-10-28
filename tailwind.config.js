@@ -8,14 +8,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Theme variables mapping
+        // Direct theme surfaces and elements
         canvas: 'var(--bg-canvas)',
-        surface: {
-          DEFAULT: 'var(--bg-surface)',
-          sidebar: 'var(--bg-surface)',
-          card: 'var(--bg-card)',
-          elevated: 'var(--bg-elevated)',
-        },
+        surface: 'var(--bg-surface)',
+        card: 'var(--bg-card)',
+        elevated: 'var(--bg-elevated)',
+        subtle: 'var(--border-subtle)',
         ink: {
           primary: 'var(--text-primary)',
           secondary: 'var(--text-secondary)',
@@ -24,18 +22,18 @@ export default {
         gold: {
           300: '#E4CCA0',
           400: '#D6B97A',
-          500: '#C6A45C',
+          500: 'var(--gold-accent)',
           600: '#B28E43',
           700: '#8E7032',
         },
         emerald: {
           400: '#34D399',
-          500: '#10B981',
+          500: 'var(--emerald-accent)',
           600: '#059669',
         },
         ruby: {
           400: '#F87171',
-          500: '#EF4444',
+          500: 'var(--ruby-accent)',
           600: '#DC2626',
         },
       },
@@ -50,7 +48,7 @@ export default {
       boxShadow: {
         card: '0 1px 3px rgba(0, 0, 0, 0.15)',
         elevated: '0 4px 12px rgba(0, 0, 0, 0.2)',
-        dropdown: '0 8px 24px rgba(0, 0, 0, 0.35)',
+        dropdown: '0 8px 30px rgba(0, 0, 0, 0.4)',
       },
       keyframes: {
         ticker: {

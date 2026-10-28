@@ -147,7 +147,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCopilot }) => {
             {isDark ? (
               <Sun className="w-4 h-4 text-gold-500" />
             ) : (
-              <Moon className="w-4 h-4 text-slate-700" />
+              <Moon className="w-4 h-4 text-ink-primary" />
             )}
           </button>
 

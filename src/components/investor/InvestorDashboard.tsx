@@ -371,49 +371,49 @@ export const InvestorDashboard: React.FC<InvestorDashboardProps> = ({
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mt-3.5">
               <button
                 onClick={() => onOpenCopilotWithPrompt?.('When is my next interest payout for Agreement #AG-8912?')}
-                className="p-3 rounded-lg bg-elevated hover:brightness-105 border border-subtle text-left text-xs transition-colors group"
+                className="p-3 rounded-lg bg-elevated hover:brightness-105 border border-subtle text-left text-xs transition-colors group cursor-pointer"
               >
                 <div className="text-ink-primary font-medium group-hover:text-gold-500 transition-colors">
                   Next Payout for #AG-8912?
                 </div>
                 <div className="text-[11px] text-ink-muted mt-0.5">
-                  View scheduled 01 Nov date & ₹81,563 net
+                  Scheduled for 15 Nov 2026 • ₹45,833/mo
                 </div>
               </button>
 
               <button
-                onClick={() => onOpenCopilotWithPrompt?.('What is the tax implication on my quarterly payouts?')}
-                className="p-3 rounded-lg bg-elevated hover:brightness-105 border border-subtle text-left text-xs transition-colors group"
+                onClick={() => onOpenCopilotWithPrompt?.('How much interest have I earned so far?')}
+                className="p-3 rounded-lg bg-elevated hover:brightness-105 border border-subtle text-left text-xs transition-colors group cursor-pointer"
               >
                 <div className="text-ink-primary font-medium group-hover:text-gold-500 transition-colors">
-                  Tax Deducted at Source (TDS)?
+                  Interest Earned So Far?
                 </div>
                 <div className="text-[11px] text-ink-muted mt-0.5">
-                  Section 194A withholding & Form 16A rules
+                  Total ₹2,48,500 accrued across mandates
                 </div>
               </button>
 
               <button
-                onClick={() => onOpenCopilotWithPrompt?.('Can I withdraw 50% of my principal before the 6-month lock-in?')}
-                className="p-3 rounded-lg bg-elevated hover:brightness-105 border border-subtle text-left text-xs transition-colors group"
+                onClick={() => onOpenCopilotWithPrompt?.('What will I receive if I invest ₹10 lakh for 12 months?')}
+                className="p-3 rounded-lg bg-elevated hover:brightness-105 border border-subtle text-left text-xs transition-colors group cursor-pointer"
               >
                 <div className="text-ink-primary font-medium group-hover:text-gold-500 transition-colors">
-                  Early Exit & Seasoning?
+                  Returns on ₹10L for 12 Months?
                 </div>
                 <div className="text-[11px] text-ink-muted mt-0.5">
-                  Clause 7.1 lock-in check for your notes
+                  Illustrative return: ₹11,00,000 maturity value
                 </div>
               </button>
 
               <button
-                onClick={() => onOpenCopilotWithPrompt?.('What is the blended annual yield on my current portfolio?')}
-                className="p-3 rounded-lg bg-elevated hover:brightness-105 border border-subtle text-left text-xs transition-colors group"
+                onClick={() => onOpenCopilotWithPrompt?.('Can I withdraw 50% of my principal before the lock-in ends?')}
+                className="p-3 rounded-lg bg-elevated hover:brightness-105 border border-subtle text-left text-xs transition-colors group cursor-pointer"
               >
                 <div className="text-ink-primary font-medium group-hover:text-gold-500 transition-colors">
-                  Calculate Blended Annual Yield?
+                  Withdraw 50% Before Lock-in?
                 </div>
                 <div className="text-[11px] text-ink-muted mt-0.5">
-                  Examine 14.85% weighted rate across notes
+                  Clause 7.1 seasoning & lock-in terms check
                 </div>
               </button>
             </div>

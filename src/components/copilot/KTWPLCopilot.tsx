@@ -6,10 +6,9 @@ import {
   Sparkles, 
   X, 
   Send, 
-  Bot, 
   ShieldCheck, 
   ArrowRight,
-  User
+  HelpCircle
 } from 'lucide-react';
 
 interface KTWPLCopilotProps {
@@ -30,47 +29,61 @@ export const KTWPLCopilot: React.FC<KTWPLCopilotProps> = ({
   onClearPendingPrompt,
 }) => {
   const { role } = useAuth();
-  const [messages, setMessages] = useState<ChatMessage[]>([
+
+  // Demo questions from sampleQuestions.md
+  const investorPrompts = [
+    'When is my next interest payout for Agreement #AG-8912?',
+    'How much interest have I earned so far?',
+    'What will I receive if I invest ₹10 lakh for 12 months?',
+    'Can I withdraw 50% of my principal before the lock-in ends?',
+    'Is my investment agreement approved?',
+    'Why is my credited interest lower than expected?',
+  ];
+
+  const adminPrompts = [
+    'Show all pending withdrawal requests above ₹10 lakh.',
+    'Summarize liquidity outflows for next week.',
+    'How much new capital came in today?',
+    'Which investors have incomplete KYC?',
+    'Why is a withdrawal request pending?',
+    'Which agreements mature in the next 30 days?',
+  ];
+
+  const compliancePrompts = [
+    'Which investors have incomplete KYC?',
+    'Summarize liquidity outflows for next week.',
+    'Show all pending withdrawal requests above ₹10 lakh.',
+    'Which agreements mature in the next 30 days?',
+  ];
+
+  const samplePrompts = role === 'admin' 
+    ? adminPrompts 
+    : role === 'compliance' 
+    ? compliancePrompts 
+    : investorPrompts;
+
+  const [messages, setMessages] = useState<ChatMessage[]>(() => [
     {
       id: 'msg-welcome',
       sender: 'assistant',
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      text: `Welcome to the KTWPL Institutional Assistant.\n\nI have indexed your active mandates (#AG-8912, #AG-9204, #AG-7840), our double-entry ledger records, and current SEBI regulatory circulars. How may I assist with your mandate or operations?`,
+      text: `Welcome to the KTWPL Institutional Assistant.\n\nI am pre-loaded with your active mandates, General Ledger records, SEBI compliance circulars, and treasury forecasts. Select any demo query below or ask a custom question:`,
       citations: [
         {
           label: 'Master Mandate Repository',
-          source: 'KTWPL Digitized Escrow Ledger',
+          source: 'KTWPL Digitized Escrow Ledger & Vault',
         },
       ],
-      quickActions: [
-        { label: 'When is my next interest payout for Agreement #AG-8912?', actionType: 'PROMPT' },
-        { label: 'What is the tax implication on my quarterly payouts?', actionType: 'PROMPT' },
-      ],
+      quickActions: (role === 'admin' ? adminPrompts : investorPrompts).slice(0, 3).map(q => ({
+        label: q,
+        actionType: 'PROMPT' as const,
+      })),
     },
   ]);
 
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-
-  // Suggested prompt chips based on active role
-  const samplePrompts = role === 'admin'
-    ? [
-        'Show me all pending withdrawal requests over ₹10 Lakhs',
-        'Summarize liquidity outflows for next week.',
-        'What is our current escrow coverage ratio?',
-      ]
-    : role === 'compliance'
-    ? [
-        'Are there any pending CKYC or PAN-Aadhaar mismatch flags?',
-        'Verify compliance with SEBI client fund segregation mandate',
-        'Show latest audit hash seals for October payouts',
-      ]
-    : [
-        'When is my next interest payout for Agreement #AG-8912?',
-        'What is the tax implication on my quarterly payouts?',
-        'Can I withdraw 50% of my principal before the 6-month lock-in?',
-      ];
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -119,7 +132,7 @@ export const KTWPLCopilot: React.FC<KTWPLCopilotProps> = ({
 
       setMessages(prev => [...prev, botMsg]);
       setIsTyping(false);
-    }, 450);
+    }, 400);
   };
 
   const handleActionClick = (action: any) => {
@@ -136,50 +149,71 @@ export const KTWPLCopilot: React.FC<KTWPLCopilotProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-y-0 right-0 z-50 w-full sm:w-[460px] bg-card border-l border-subtle shadow-dropdown flex flex-col animate-in slide-in-from-right duration-200">
-      {/* Header */}
-      <div className="p-4 border-b border-subtle bg-surface flex items-center justify-between">
+    <div 
+      className="fixed bottom-20 right-3 sm:right-7 z-50 w-[calc(100vw-1.5rem)] sm:w-[480px] h-[640px] max-h-[calc(100vh-6.5rem)] bg-card border border-card rounded-2xl shadow-dropdown flex flex-col overflow-hidden animate-in slide-in-from-bottom-5 duration-200"
+      style={{ backgroundColor: 'var(--bg-card)' }}
+    >
+      {/* Solid Header */}
+      <div 
+        className="p-3.5 sm:p-4 border-b border-subtle bg-surface flex items-center justify-between shrink-0"
+        style={{ backgroundColor: 'var(--bg-surface)' }}
+      >
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-500">
+          <div className="w-8 h-8 rounded-full bg-gold-500/15 border border-gold-500/30 flex items-center justify-center text-gold-500 shadow-sm shrink-0">
             <Sparkles className="w-4 h-4" />
           </div>
           <div>
             <h3 className="text-xs font-semibold text-ink-primary flex items-center gap-2">
-              <span>KTWPL Assistant</span>
-              <span className="text-[10px] font-mono text-emerald-500 bg-emerald-500/10 px-1.5 py-0.2 rounded">
+              <span>KTWPL Copilot</span>
+              <span className="text-[10px] font-mono text-emerald-500 bg-emerald-500/10 px-1.5 py-0.2 rounded font-medium border border-emerald-500/20">
                 RAG Active
               </span>
             </h3>
             <p className="text-[10px] text-ink-muted">
-              Context: {role.toUpperCase()}
+              Institutional Context: {role.toUpperCase()}
             </p>
           </div>
         </div>
 
         <button
           onClick={onClose}
-          className="p-1 rounded-md text-ink-muted hover:text-ink-primary hover:bg-elevated transition-colors"
+          className="p-1.5 rounded-lg text-ink-muted hover:text-ink-primary hover:bg-elevated transition-colors"
           title="Close Assistant"
         >
           <X className="w-4 h-4" />
         </button>
       </div>
 
-      {/* Suggested Prompt Chips */}
-      <div className="p-2.5 border-b border-subtle bg-canvas overflow-x-auto whitespace-nowrap scrollbar-none flex gap-1.5">
-        {samplePrompts.map((p, idx) => (
-          <button
-            key={idx}
-            onClick={() => handleSend(p)}
-            className="text-[11px] px-2.5 py-1 rounded-md bg-elevated hover:brightness-110 border border-subtle text-ink-secondary hover:text-ink-primary transition-colors shrink-0"
-          >
-            {p}
-          </button>
-        ))}
+      {/* Suggested Demo Prompts Bar */}
+      <div 
+        className="p-2.5 border-b border-subtle bg-canvas shrink-0"
+        style={{ backgroundColor: 'var(--bg-canvas)' }}
+      >
+        <div className="flex items-center justify-between gap-1.5 mb-1.5 px-0.5">
+          <div className="flex items-center gap-1.5 text-[10px] font-mono text-ink-muted uppercase tracking-wider font-semibold">
+            <HelpCircle className="w-3 h-3 text-gold-500" />
+            <span>Demo Questions ({role}):</span>
+          </div>
+          <span className="text-[10px] text-ink-muted font-mono">{samplePrompts.length} Ready</span>
+        </div>
+        <div className="flex gap-1.5 overflow-x-auto whitespace-nowrap pb-1 scrollbar-none">
+          {samplePrompts.map((p, idx) => (
+            <button
+              key={idx}
+              onClick={() => handleSend(p)}
+              className="text-[11px] px-2.5 py-1 rounded-md bg-elevated hover:bg-gold-500/10 border border-subtle hover:border-gold-500/40 text-ink-secondary hover:text-ink-primary transition-all shrink-0 font-medium cursor-pointer"
+            >
+              {p}
+            </button>
+          ))}
+        </div>
       </div>
 
-      {/* Messages Scroll Area */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-3.5">
+      {/* Messages Scroll Area with Solid Background */}
+      <div 
+        className="flex-1 overflow-y-auto p-4 space-y-3.5 bg-card"
+        style={{ backgroundColor: 'var(--bg-card)' }}
+      >
         {messages.map(msg => {
           const isUser = msg.sender === 'user';
 
@@ -195,11 +229,14 @@ export const KTWPLCopilot: React.FC<KTWPLCopilotProps> = ({
               </div>
 
               <div
-                className={`max-w-[92%] p-3.5 rounded-xl text-xs leading-relaxed ${
+                className={`max-w-[92%] p-3.5 rounded-xl text-xs leading-relaxed shadow-sm ${
                   isUser
                     ? 'bg-elevated text-ink-primary border border-subtle'
-                    : 'bg-surface border border-card text-ink-secondary'
+                    : 'bg-surface border border-card text-ink-primary'
                 }`}
+                style={{
+                  backgroundColor: isUser ? 'var(--bg-elevated)' : 'var(--bg-surface)',
+                }}
               >
                 <div className="whitespace-pre-line font-sans">{msg.text}</div>
 
@@ -214,6 +251,7 @@ export const KTWPLCopilot: React.FC<KTWPLCopilotProps> = ({
                       <div
                         key={i}
                         className="text-[10px] p-1.5 rounded bg-canvas border border-subtle font-mono text-ink-muted"
+                        style={{ backgroundColor: 'var(--bg-canvas)' }}
                       >
                         <strong className="text-ink-primary block">{c.clause || c.label}:</strong>
                         <span>{c.source}</span>
@@ -229,10 +267,10 @@ export const KTWPLCopilot: React.FC<KTWPLCopilotProps> = ({
                       <button
                         key={i}
                         onClick={() => handleActionClick(qa)}
-                        className="text-[11px] px-2.5 py-1 rounded bg-elevated hover:brightness-110 border border-subtle text-gold-500 font-medium flex items-center gap-1 transition-colors"
+                        className="text-[11px] px-2.5 py-1 rounded bg-elevated hover:bg-gold-500/10 border border-subtle hover:border-gold-500/40 text-gold-500 font-medium flex items-center gap-1 transition-colors cursor-pointer text-left"
                       >
-                        <span>{qa.label}</span>
-                        <ArrowRight className="w-3 h-3" />
+                        <span className="line-clamp-1">{qa.label}</span>
+                        <ArrowRight className="w-3 h-3 shrink-0" />
                       </button>
                     ))}
                   </div>
@@ -253,7 +291,10 @@ export const KTWPLCopilot: React.FC<KTWPLCopilotProps> = ({
       </div>
 
       {/* Input Box Footer */}
-      <div className="p-3 border-t border-subtle bg-surface">
+      <div 
+        className="p-3 border-t border-subtle bg-surface shrink-0"
+        style={{ backgroundColor: 'var(--bg-surface)' }}
+      >
         <form
           onSubmit={e => {
             e.preventDefault();
@@ -265,13 +306,14 @@ export const KTWPLCopilot: React.FC<KTWPLCopilotProps> = ({
             type="text"
             value={input}
             onChange={e => setInput(e.target.value)}
-            placeholder="Ask about payouts, lock-in, tax..."
+            placeholder="Ask about payouts, lock-in, tax, outflows..."
             className="flex-1 px-3.5 py-2 rounded-lg bg-canvas border border-subtle text-xs text-ink-primary placeholder-ink-muted focus:outline-none focus:border-gold-500/50"
+            style={{ backgroundColor: 'var(--bg-canvas)' }}
           />
           <button
             type="submit"
             disabled={!input.trim()}
-            className="p-2 rounded-lg bg-gold-500 hover:bg-gold-600 text-[#080B12] disabled:opacity-40 transition-colors shadow-sm"
+            className="p-2 rounded-lg bg-gold-500 hover:bg-gold-600 text-[#080B12] disabled:opacity-40 transition-colors shadow-sm shrink-0"
             title="Send"
           >
             <Send className="w-4 h-4" />

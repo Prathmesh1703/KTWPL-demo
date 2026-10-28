@@ -58,7 +58,7 @@ export const AgreementVaultModal: React.FC<AgreementVaultModalProps> = ({
     >
       <div className="space-y-5">
         {/* Verification Status */}
-        <div className="p-3.5 rounded-lg bg-[#121925] border border-white/[0.08] flex items-center justify-between">
+        <div className="p-3.5 rounded-lg bg-surface border border-subtle flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <BadgeCheck className="w-5 h-5 text-emerald-500 shrink-0" />
             <div>
@@ -77,7 +77,7 @@ export const AgreementVaultModal: React.FC<AgreementVaultModalProps> = ({
         </div>
 
         {/* Metadata Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-3.5 rounded-lg bg-[#0A0D14] border border-white/[0.06] text-xs font-mono">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-3.5 rounded-lg bg-surface border border-subtle text-xs font-mono">
           <div>
             <span className="text-[10px] text-ink-muted font-sans block">Client PAN</span>
             <span className="font-medium text-ink-primary mt-0.5 block">{agreement.clientPan}</span>
@@ -104,7 +104,7 @@ export const AgreementVaultModal: React.FC<AgreementVaultModalProps> = ({
           </h4>
 
           <div className="space-y-2 text-xs text-ink-secondary leading-relaxed font-sans">
-            <div className="p-3 rounded-lg bg-[#0A0D14] border border-white/[0.04]">
+            <div className="p-3 rounded-lg bg-surface border border-subtle">
               <strong className="text-ink-primary block mb-0.5">
                 Clause 4.2 — Interest Accrual & Escrow Mandate:
               </strong>
@@ -112,7 +112,7 @@ export const AgreementVaultModal: React.FC<AgreementVaultModalProps> = ({
               the agreed annual rate of {formatPercent(agreement.interestRateAnnual)} and be remitted on a {agreement.periodicity.toLowerCase()} cycle directly to the investor's verified bank escrow mandate.
             </div>
 
-            <div className="p-3 rounded-lg bg-[#0A0D14] border border-white/[0.04]">
+            <div className="p-3 rounded-lg bg-surface border border-subtle">
               <strong className="text-ink-primary block mb-0.5">
                 Clause 7.1 — Seasoning Lock-in:
               </strong>
@@ -120,7 +120,7 @@ export const AgreementVaultModal: React.FC<AgreementVaultModalProps> = ({
               commencement ({formatDate(agreement.startDate)}). Any early redemption requested thereafter shall incur an exit administrative fee of {formatPercent(agreement.clauses.earlyWithdrawalPenaltyPercent)}.
             </div>
 
-            <div className="p-3 rounded-lg bg-[#0A0D14] border border-white/[0.04]">
+            <div className="p-3 rounded-lg bg-surface border border-subtle">
               <strong className="text-ink-primary block mb-0.5">
                 Clause 9.1 — Tax Withholding (TDS):
               </strong>
@@ -131,7 +131,7 @@ export const AgreementVaultModal: React.FC<AgreementVaultModalProps> = ({
         </div>
 
         {/* Cryptographic SHA-256 Seal */}
-        <div className="p-3 rounded-lg bg-[#0A0D14] border border-white/[0.06]">
+        <div className="p-3 rounded-lg bg-surface border border-subtle">
           <div className="flex items-center justify-between mb-1 text-xs">
             <span className="text-ink-muted font-mono text-[10px] uppercase">SHA-256 Ledger Hash</span>
             <button
@@ -142,13 +142,13 @@ export const AgreementVaultModal: React.FC<AgreementVaultModalProps> = ({
               <span>{copied ? 'Copied' : 'Copy'}</span>
             </button>
           </div>
-          <div className="p-2 rounded bg-[#080B12] font-mono text-[11px] text-ink-muted break-all select-all">
+          <div className="p-2 rounded bg-canvas font-mono text-[11px] text-ink-muted break-all select-all border border-subtle">
             {agreement.cryptoHash}
           </div>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-white/[0.08]">
+        <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-subtle">
           <button
             onClick={onClose}
             className="px-3.5 py-1.5 rounded-md text-xs text-ink-secondary hover:text-ink-primary transition-colors"

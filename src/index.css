@@ -2,14 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  /* Softer, comfortable lighter dark tone (slate-navy) that eliminates eye stress */
+:root, :root.dark, html.dark, body.dark, .dark {
+  /* Slate-navy institutional dark mode (softer, eye-friendly, distinct surfaces) */
   --bg-canvas: #0F172A;
   --bg-surface: #131E34;
   --bg-card: #182238;
   --bg-elevated: #222F4C;
   --border-subtle: rgba(255, 255, 255, 0.10);
-  --border-card: rgba(255, 255, 255, 0.14);
+  --border-card: rgba(255, 255, 255, 0.15);
   --text-primary: #F8FAFC;
   --text-secondary: #94A3B8;
   --text-muted: #64748B;
@@ -18,23 +18,27 @@
   --ruby-accent: #EF4444;
 }
 
-html.light, body.light, .light {
-  /* Crisp institutional light mode */
-  --bg-canvas: #F8FAFC;
+:root.light, html.light, body.light, .light {
+  /* Crisp institutional light mode (clean financial terminal aesthetic) */
+  --bg-canvas: #F1F5F9;
   --bg-surface: #FFFFFF;
   --bg-card: #FFFFFF;
-  --bg-elevated: #F1F5F9;
+  --bg-elevated: #F8FAFC;
   --border-subtle: #E2E8F0;
   --border-card: #CBD5E1;
   --text-primary: #0F172A;
-  --text-secondary: #475569;
-  --text-muted: #94A3B8;
-  --gold-accent: #B8860B;
+  --text-secondary: #334155;
+  --text-muted: #64748B;
+  --gold-accent: #B45309;
   --emerald-accent: #059669;
   --ruby-accent: #DC2626;
 }
 
 @layer base {
+  * {
+    border-color: var(--border-subtle);
+  }
+
   body {
     background-color: var(--bg-canvas);
     color: var(--text-primary);
@@ -66,12 +70,12 @@ html.light, body.light, .light {
   background-color: var(--bg-card);
   border: 1px solid var(--border-card);
   border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   transition: border-color 0.18s ease, transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease;
 }
 
 .institutional-card:hover {
-  border-color: rgba(198, 164, 92, 0.35);
+  border-color: var(--gold-accent);
 }
 
 /* Subtle 3D perspective transition on cards */
@@ -83,7 +87,7 @@ html.light, body.light, .light {
 
 .perspective-card:hover {
   transform: perspective(1000px) translateY(-2px) rotateX(1deg);
-  box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.2);
 }
 
 /* Floating 3D AI assistant bubble animation */

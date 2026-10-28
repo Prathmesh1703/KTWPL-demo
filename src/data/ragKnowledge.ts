@@ -15,62 +15,107 @@ export const ragKnowledgeBase: RagDocument[] = [
     title: 'Agreement #AG-8912 - Payout Cycle & Schedule',
     clause: 'Clause 4.2 (Interest Payout Mandate)',
     source: 'Digitized Agreement #AG-8912 / eMudhra DSC-9941092837',
-    content: 'Agreement #AG-8912 has an active principal of ₹75,00,000 at 14.50% annual yield. Payout frequency is Monthly, payable on the 1st business day of each calendar month. The upcoming payout is scheduled for 01 November 2026 with a gross interest of ₹90,625 and net payout of ₹81,563 after 10% TDS deduction.',
-    keywords: ['payout', 'next interest', 'ag-8912', 'when is my next', 'interest cycle', 'november'],
+    content: 'Agreement #AG-8912 has an active principal of ₹50,00,000 at 11% annual interest rate. Payout frequency is Monthly. Next scheduled payout is on 15 November 2026 with estimated monthly interest of ₹45,833.33 before applicable deductions.',
+    keywords: ['payout', 'next interest', 'ag-8912', 'when is my next', 'interest payout', 'november'],
   },
   {
     id: 'rag-02',
-    category: 'TAX_POLICY',
-    title: 'Tax Deducted at Source (TDS) u/s 194A',
-    clause: 'Clause 9.1 (Statutory Tax Withholding)',
-    source: 'Income Tax Act 1961 Section 194A & KTWPL Tax Memo 2025-26',
-    content: 'All interest disbursements from KTWPL Capital Management are subject to statutory TDS under Section 194A at the standard rate of 10% for Resident Individuals with verified PAN (or 20% in absence of PAN). Form 16A TDS certificates are generated and filed quarterly with TRACES and made available in the Digital Agreement Vault within 15 days of quarter end.',
-    keywords: ['tax', 'tds', 'tax implication', 'quarterly payouts', 'form 16a', '194a', 'withholding'],
+    category: 'LEDGER_AUDIT',
+    title: 'Cumulative Interest Accrual Register',
+    clause: 'Ledger Summary #GL-4421',
+    source: 'KTWPL Escrow Double-Entry Ledger & Bank Clearing Feeds',
+    content: 'Total interest accrued across active investments stands at ₹2,48,500 as of 28 October 2026. Interest already credited: ₹1,90,000. Interest accrued but not yet credited: ₹58,500. TDS deducted to date: ₹19,000.',
+    keywords: ['earned so far', 'interest earned', 'how much interest', 'accrued', 'earned', 'tds deducted'],
   },
   {
     id: 'rag-03',
     category: 'AGREEMENT_TERMS',
-    title: 'Early Liquidation & Lock-in Restrictions',
-    clause: 'Clause 7.1 (Lock-in & Premature Redemption)',
-    source: 'KTWPL Master Capital Agreement Terms & Conditions 2024',
-    content: 'Capital deployments carry a mandatory minimum lock-in period of 6 months from deployment effective date. Withdrawals prior to completion of 6 months are strictly prohibited except under exceptional medical/statutory circumstances requiring Board approval. For withdrawals after 6 months but prior to tenor maturity, an early redemption fee of 1.5% to 2.0% applies on the redeemed principal tranche.',
-    keywords: ['withdraw', '50%', 'lock-in', 'before 6-month', 'early withdrawal', 'penalty', 'premature'],
+    title: 'Standard 12-Month Capital Growth Engine',
+    clause: 'Product Specification Note #KTW-12M',
+    source: 'KTWPL Yield & Fixed Maturity Disclosure',
+    content: 'For an illustrative deployment of ₹10,00,000 over 12 months at 10% per annum simple interest: estimated simple interest is ₹1,00,000 and estimated maturity value is ₹11,00,000 before applicable deductions.',
+    keywords: ['invest 10 lakh', '10 lakh for 12 months', 'what will i receive', '10 lakh', 'returns'],
   },
   {
     id: 'rag-04',
-    category: 'LIQUIDITY_REPORT',
-    title: 'Maker-Checker Queue: High-Value Withdrawal Demands',
-    clause: 'Treasury Memo #TR-2026-10-W4',
-    source: 'KTWPL Back-Office Maker-Checker Queue',
-    content: 'Current pending withdrawal requests exceeding ₹10 Lakhs: Request #WR-1049 by client Arjun Singhania (PAN: AAACS8912P) under Agreement #AG-8912 for ₹15,00,000. Status: PENDING_CHECKER approval. Verified by Maker Priyanka Sen with clean 18-month seasoned principal.',
-    keywords: ['pending withdrawal', 'over 10 lakhs', 'pending requests', 'withdrawal queue', 'wr-1049'],
+    category: 'AGREEMENT_TERMS',
+    title: 'Seasoning & Lock-in Restrictions',
+    clause: 'Clause 7.1 (Lock-in & Premature Redemption)',
+    source: 'KTWPL Master Capital Agreement Terms 2024',
+    content: 'Agreement AG-8912 includes a six-month lock-in period. Early withdrawal of 50% or any portion of principal before the lock-in ends may be restricted or subject to specific conditions.',
+    keywords: ['withdraw 50%', 'lock-in', 'before lock-in', '50% of my principal', 'lock-in ends', 'early withdrawal'],
   },
   {
     id: 'rag-05',
-    category: 'LIQUIDITY_REPORT',
-    title: 'Treasury Outflow & Cash Runway Forecast',
-    clause: 'Weekly Liquidity Projection W1 & W2',
-    source: 'Treasury Risk & Liquidity Outflow Matrix 2026-Q4',
-    content: 'Total liquidity outflows projected for upcoming Week 1 (Oct 28 - Nov 03) stand at ₹19,85,000, comprising ₹4,85,000 in scheduled monthly interest disbursements across 12 mandates and ₹15,00,000 for pending withdrawal request #WR-1049. Escrow surplus stands at ₹8.42 Crores, maintaining a 424% liquidity coverage ratio.',
-    keywords: ['liquidity', 'outflows', 'next week', 'cash outflows', 'treasury', 'forecast'],
+    category: 'AGREEMENT_TERMS',
+    title: 'Agreement Status & Electronic Execution',
+    clause: 'Digital Vault Record #AG-8912',
+    source: 'eMudhra DSC-9941092837 / SHA-256 Validated',
+    content: 'Agreement AG-8912 is currently marked Active in the system. Principal: ₹50,00,000. Digital signature: Completed. Activation date: 15 May 2026. Maturity date: 15 May 2027.',
+    keywords: ['agreement approved', 'is my agreement approved', 'is my investment agreement approved', 'active agreement', 'ag-8912 status'],
   },
   {
     id: 'rag-06',
-    category: 'SEBI_REGULATIONS',
-    title: 'SEBI Brokerage & Capital Deployment Compliance',
-    clause: 'SEBI Circular SEBI/HO/MIRSD/DOP/CIR/P/2023/141',
-    source: 'SEBI Enhanced Supervision & Client Fund Segregation Mandate',
-    content: 'In strict compliance with SEBI circulars, all client funds are maintained in segregated scheduled commercial bank escrow accounts with real-time end-of-day bank balance reporting to clearing corporations. Client collateral is never re-hypothecated, and quarterly CKYC / AML screening is mandatory for tier-1 active investors.',
-    keywords: ['sebi', 'regulations', 'compliance', 'escrow', 'segregation', 'ckyc'],
+    category: 'LEDGER_AUDIT',
+    title: 'Discrepancy & TDS Withholding Audit',
+    clause: 'Reconciliation Memo #REC-4583',
+    source: 'Sourced from General Ledger #GL-109 & TRACES Filing',
+    content: 'The interest difference of ₹4,583 is under review across ledger entries to verify whether it relates to TDS withholding (Section 194A), a partial-period calculation, a rate adjustment or another recorded transaction.',
+    keywords: ['lower than expected', 'credited interest lower', 'why is my interest lower', 'difference', '4583'],
   },
   {
     id: 'rag-07',
-    category: 'LEDGER_AUDIT',
-    title: 'General Ledger #GL-109 Audit Trail',
-    clause: 'Ledger Audit Record #GL-109',
-    source: 'Sourced from General Ledger #GL-109 & AWS ap-south-1 Ledger Seal',
-    content: 'Most recent settled transaction: ₹90,625 interest credited on 2026-10-01 under reference INV-2026-10-8912 with simultaneous TDS deduction of ₹9,062 under reference TDS-2026-Q3-8912. Verified against HDFC Bank Escrow batch payment voucher #PV-88910.',
-    keywords: ['gl-109', 'gl-4421', 'ledger', 'last transaction', 'interest credited', 'october payout'],
+    category: 'LIQUIDITY_REPORT',
+    title: 'High-Value Redemption Pipeline (> ₹10L)',
+    clause: 'Maker-Checker Queue Filter: > ₹10,00,000',
+    source: 'KTWPL Back-Office Maker-Checker Engine',
+    content: 'There are 3 pending withdrawal requests above ₹10 lakh in the illustrative dataset totalling ₹52,00,000: WR-7781 (₹25,00,000 - Checker approval), WR-7788 (₹17,00,000 - Operations review), WR-7792 (₹10,00,000 - Checker approval).',
+    keywords: ['pending withdrawal', 'above 10 lakh', 'above 10l', 'over 10 lakh', 'pending requests above', '10 lakh'],
+  },
+  {
+    id: 'rag-08',
+    category: 'LIQUIDITY_REPORT',
+    title: 'Weekly Liquidity Outflow Forecast',
+    clause: 'Treasury Risk & Liquidity Projection W1',
+    source: 'KTWPL Treasury Risk Model (29 Oct - 04 Nov 2026)',
+    content: 'Projected outflows for 29 October–4 November 2026 are ₹1.85 crore: Interest payouts ₹65 lakh, Maturities ₹80 lakh, Withdrawals ₹40 lakh.',
+    keywords: ['liquidity outflows', 'outflows for next week', 'next week', 'summarize liquidity', 'outflows next week'],
+  },
+  {
+    id: 'rag-09',
+    category: 'LIQUIDITY_REPORT',
+    title: 'Intraday Capital Inflows Reconciled',
+    clause: 'Daily Capital Intake Feed #IN-2026-10-28',
+    source: 'HDFC Escrow Clearing & Banking Feeds',
+    content: "Today's illustrative fund inflows total ₹3.25 crore across 8 transactions: Approved and reconciled ₹2.10 crore, Awaiting checker approval ₹85 lakh, Receipt reconciliation pending ₹30 lakh.",
+    keywords: ['new capital came in today', 'capital came in today', 'new capital today', 'inflows today', 'today capital'],
+  },
+  {
+    id: 'rag-10',
+    category: 'SEBI_REGULATIONS',
+    title: 'SEBI CKYC & PMLA Compliance Register',
+    clause: 'PMLA Audit Register 2026-Q3',
+    source: 'SEBI KYC Registry & Karvy KRA Verification Gateway',
+    content: 'The illustrative compliance register contains 86 investors with pending verification and 35 with failed or flagged checks. Recommended steps include reviewing pending CKYC/PAN/bank cases, identifying failed checks, assigning follow-ups, and restricting actions per policy.',
+    keywords: ['incomplete kyc', 'investors have incomplete kyc', 'which investors have incomplete', 'pending verification', 'failed checks'],
+  },
+  {
+    id: 'rag-11',
+    category: 'LIQUIDITY_REPORT',
+    title: 'Workflow Audit: Ticket #WR-7781',
+    clause: 'Queue Record #WR-7781',
+    source: 'Maker-Checker Execution Log #MC-9021',
+    content: 'Request WR-7781 is awaiting checker approval in the illustrative workflow. Requested amount: ₹25,00,000. Submission date: 27 October 2026. Current status: Pending checker approval. Next action: An authorized checker must review eligibility, available balance and supporting records.',
+    keywords: ['why is a withdrawal request pending', 'withdrawal request pending', 'wr-7781', 'why is withdrawal pending'],
+  },
+  {
+    id: 'rag-12',
+    category: 'AGREEMENT_TERMS',
+    title: '30-Day Contractual Maturity Horizon',
+    clause: 'Escrow Depository Maturity Schedule',
+    source: 'KTWPL Treasury & Client Mandate Registry',
+    content: 'The illustrative maturity register identifies 12 agreements maturing within the next 30 days, with aggregate principal of ₹4.60 crore. Review maturity dates, final interest accruals, bank verification, renewals, and liquidity before disbursement.',
+    keywords: ['agreements mature in the next 30 days', 'mature in the next 30 days', 'agreements mature', '30 days', 'upcoming maturities'],
   },
 ];
 
@@ -79,15 +124,24 @@ export function queryRag(queryText: string, userRole: string, activeSimulatorAmo
   citations: Array<{ label: string; source: string; clause?: string }>;
   quickActions: Array<{ label: string; actionType: any; payload?: any }>;
 } {
-  const query = queryText.toLowerCase().trim();
+  const q = queryText.toLowerCase().replace(/[?.,!#]/g, ' ').replace(/\s+/g, ' ').trim();
 
-  // 1. Next interest payout for AG-8912
-  if (query.includes('next interest') || query.includes('ag-8912') || query.includes('when is my next')) {
+  // ==========================================
+  // INVESTOR PORTAL QUESTIONS (from sampleQuestions.md)
+  // ==========================================
+
+  // Q1: When is my next interest payout for Agreement #AG-8912?
+  if (
+    q.includes('next interest') || 
+    q.includes('ag 8912') || 
+    (q.includes('next') && q.includes('payout')) ||
+    (q.includes('when') && q.includes('interest'))
+  ) {
     return {
-      answer: `Your next monthly interest payout for **Agreement #AG-8912** is scheduled for **01 November 2026** (in 4 days).\n\n- **Gross Interest Due:** ₹90,625\n- **TDS Deduction (10% u/s 194A):** -₹9,062\n- **Net Payout to Bank:** **₹81,563**\n- **Designated Account:** HDFC Bank Nariman Point (\`••••8492\`)\n\nThis payment will be directly credited to your registered bank account via NEFT/RTGS with automated SMS & email advice.`,
+      answer: `Your next interest payout for Agreement AG-8912 is scheduled for **15 November 2026**.\n\n• **Principal amount:** ₹50,00,000\n• **Interest rate:** 11% per annum\n• **Estimated monthly interest:** ₹45,833.33 before applicable deductions\n• **Expected payout:** Subject to the agreement terms and payment processing.`,
       citations: [
         {
-          label: 'Agreement Clause 4.2',
+          label: 'Agreement #AG-8912',
           clause: 'Clause 4.2 (Interest Payout Mandate)',
           source: 'Digitized Agreement #AG-8912 / eMudhra DSC-9941092837',
         },
@@ -104,50 +158,137 @@ export function queryRag(queryText: string, userRole: string, activeSimulatorAmo
     };
   }
 
-  // 2. Tax implication on quarterly payouts
-  if (query.includes('tax') || query.includes('tds') || query.includes('194a')) {
+  // Q2: How much interest have I earned so far?
+  if (
+    q.includes('earned so far') || 
+    q.includes('how much interest') || 
+    (q.includes('interest') && q.includes('earned')) ||
+    q.includes('interest accrued')
+  ) {
     return {
-      answer: `Interest payouts are treated as *Income from Other Sources* under the Indian Income Tax Act 1961.\n\n- **Statutory Withholding:** Under **Section 194A**, TDS is deducted at **10.0%** at the time of credit or payment.\n- **Form 16A Issuance:** KTWPL issues digitally signed Form 16A certificates quarterly within 15 days of the filing due date.\n- **26AS / AIS Synchronization:** All TDS credits reflect automatically in your Annual Information Statement (AIS) and Form 26AS linked to PAN \`AAACS8912P\`.\n- **Exemption:** Investors eligible for nil deduction can submit valid **Form 15G / 15H** at the commencement of each financial year.`,
+      answer: `Your total interest accrued across your active investments is **₹2,48,500** as of 28 October 2026.\n\n• **Interest already credited:** ₹1,90,000\n• **Interest accrued but not yet credited:** ₹58,500\n• **TDS deducted to date:** ₹19,000`,
       citations: [
         {
-          label: 'Tax Withholding Policy',
-          clause: 'Clause 9.1 (Statutory Tax Withholding)',
-          source: 'Income Tax Act 1961 Section 194A & KTWPL Tax Advisory',
+          label: 'General Ledger Records',
+          clause: 'Cumulative Accrual Ledger',
+          source: 'KTWPL Escrow Double-Entry Ledger #GL-4421',
+        },
+        {
+          label: 'Tax Withholding Registry',
+          clause: 'Form 26AS / AIS Reconciled',
+          source: 'TRACES Tax Withholding Central Registry',
         },
       ],
       quickActions: [
-        { label: 'Open Digital Vault', actionType: 'OPEN_AGREEMENT', payload: 'AG-8912' },
-        { label: 'Simulate Post-Tax Yield', actionType: 'SIMULATE', payload: { principal: 5000000, tenor: 24 } },
+        { label: 'View General Ledger', actionType: 'VIEW_LEDGER' },
+        { label: 'Simulate Future Yield', actionType: 'SIMULATE' },
       ],
     };
   }
 
-  // 3. Early withdrawal before 6 months
-  if (query.includes('withdraw') || query.includes('50%') || query.includes('lock-in') || query.includes('premature')) {
+  // Q3: What will I receive if I invest ₹10 lakh for 12 months?
+  if (
+    (q.includes('10 lakh') && (q.includes('12 month') || q.includes('invest') || q.includes('receive'))) ||
+    q.includes('invest 10 lakh') ||
+    q.includes('what will i receive')
+  ) {
     return {
-      answer: `Under KTWPL master agreement terms:\n\n- **Lock-in Mandate:** Deployments have a mandatory **6-month lock-in period** from effective deposit.\n- **Eligibility Check:** For your Agreement **#AG-8912** (started 15 Apr 2024), **18 months have elapsed**, so your funds have **cleared the lock-in** and you are eligible to request partial or full redemption.\n- **Premature Fee:** If redeeming before the 24-month maturity, an early redemption exit fee of **1.5%** applies on the liquidated principal amount.\n- **Processing Window:** Standard RTGS settlement is completed within **T+2 business days** upon Maker-Checker approval.`,
+      answer: `I can estimate your returns. Using an illustrative rate of 10% per annum:\n\n• **Initial investment:** ₹10,00,000\n• **Investment period:** 12 months\n• **Estimated simple interest:** ₹1,00,000\n• **Estimated maturity value:** ₹11,00,000 before applicable deductions.\n\n*This estimate assumes simple interest, a full 12-month period and no interim payouts or fees. Your actual return depends on the available product and its contractual terms.*`,
       citations: [
         {
-          label: 'Master Terms & Conditions',
+          label: 'KTWPL Yield Engine',
+          clause: 'Standard Fixed Maturity Schedule',
+          source: 'KTWPL Product Disclosure Matrix 2026',
+        },
+      ],
+      quickActions: [
+        { label: 'Launch Wealth Simulator', actionType: 'SIMULATE', payload: { principal: 1000000, tenor: 12 } },
+        { label: 'View Active Vault', actionType: 'OPEN_AGREEMENT' },
+      ],
+    };
+  }
+
+  // Q4: Can I withdraw 50% of my principal before the lock-in ends?
+  if (
+    (q.includes('withdraw') && (q.includes('50%') || q.includes('50 percent') || q.includes('lock in') || q.includes('lock-in'))) ||
+    q.includes('before the lock in') ||
+    q.includes('before the lock-in')
+  ) {
+    return {
+      answer: `Your agreement must be checked before confirming eligibility. If Agreement AG-8912 includes a six-month lock-in, an early withdrawal may be restricted or subject to specific conditions.`,
+      citations: [
+        {
+          label: 'Master Mandate Terms',
           clause: 'Clause 7.1 (Lock-in & Premature Redemption)',
           source: 'KTWPL Master Capital Agreement Terms 2024',
         },
       ],
       quickActions: [
-        { label: 'Initiate Withdrawal Request', actionType: 'OPEN_WITHDRAWAL' },
         { label: 'Review Agreement Terms', actionType: 'OPEN_AGREEMENT', payload: 'AG-8912' },
+        { label: 'Initiate Withdrawal Request', actionType: 'OPEN_WITHDRAWAL' },
       ],
     };
   }
 
-  // 4. Admin: Pending withdrawal requests over 10 lakhs
-  if (query.includes('pending withdrawal') || query.includes('over') || query.includes('10 lakh')) {
+  // Q5: Is my investment agreement approved?
+  if (
+    (q.includes('agreement') && (q.includes('approved') || q.includes('status') || q.includes('active'))) ||
+    q.includes('is my investment agreement approved')
+  ) {
     return {
-      answer: `Back-Office Review Alert: There is currently **1 pending withdrawal request exceeding ₹10,00,000** in the Maker-Checker pipeline:\n\n- **Request ID:** \`#WR-1049\`\n- **Client:** Arjun Singhania (\`AAACS8912P\`)\n- **Agreement:** #AG-8912 (Active Principal: ₹75.0 Lakhs)\n- **Requested Amount:** **₹15,00,000** (Partial Redemption)\n- **Reason:** Real estate bridge deployment\n- **Current Stage:** **Pending Checker Final Sign-off** (Maker verification cleared by Priyanka Sen)\n- **Escrow Liquidity:** Readily available in HDFC Bank Escrow account.`,
+      answer: `Your agreement is currently marked **Active** in the system.\n\n• **Agreement ID:** AG-8912\n• **Principal:** ₹50,00,000\n• **Digital signature:** Completed\n• **Activation date:** 15 May 2026\n• **Maturity date:** 15 May 2027`,
       citations: [
         {
-          label: 'Back-Office Queue',
-          clause: 'Queue ID #WR-1049',
+          label: 'Digital Vault Status',
+          clause: 'Executed Mandate Record',
+          source: 'eMudhra DSC-9941092837 / SHA-256 Validated',
+        },
+      ],
+      quickActions: [
+        { label: 'View Agreement #AG-8912', actionType: 'OPEN_AGREEMENT', payload: 'AG-8912' },
+        { label: 'Download Digital Contract', actionType: 'OPEN_AGREEMENT' },
+      ],
+    };
+  }
+
+  // Q6: Why is my credited interest lower than expected?
+  if (
+    (q.includes('interest') && (q.includes('lower') || q.includes('less') || q.includes('difference') || q.includes('expected'))) ||
+    q.includes('credited interest lower') ||
+    q.includes('why is my credited interest')
+  ) {
+    return {
+      answer: `The difference is **₹4,583**. I can review the relevant ledger entries to identify whether the difference relates to TDS, a partial-period calculation, a rate adjustment or another recorded transaction.\n\nI will compare the scheduled gross interest with the actual credit and associated deductions before identifying the reason.`,
+      citations: [
+        {
+          label: 'Ledger Audit & Reconciliation',
+          clause: 'TDS u/s 194A Withholding Check',
+          source: 'General Ledger #GL-109 / HDFC Escrow Clearing',
+        },
+      ],
+      quickActions: [
+        { label: 'View General Ledger', actionType: 'VIEW_LEDGER' },
+        { label: 'Review Active Agreement', actionType: 'OPEN_AGREEMENT' },
+      ],
+    };
+  }
+
+  // ==========================================
+  // ADMIN PORTAL QUESTIONS (from sampleQuestions.md)
+  // ==========================================
+
+  // Admin Q1: Show all pending withdrawal requests above ₹10 lakh.
+  if (
+    (q.includes('pending withdrawal') && (q.includes('above') || q.includes('10 lakh') || q.includes('10l'))) ||
+    (q.includes('withdrawal') && q.includes('above 10')) ||
+    q.includes('show all pending withdrawal requests')
+  ) {
+    return {
+      answer: `There are 3 pending withdrawal requests above ₹10 lakh in the illustrative dataset, totalling **₹52,00,000**.\n\n• **WR-7781:** ₹25,00,000 — *Pending with Checker approval*\n• **WR-7788:** ₹17,00,000 — *Pending with Operations review*\n• **WR-7792:** ₹10,00,000 — *Pending with Checker approval*`,
+      citations: [
+        {
+          label: 'Maker-Checker Pipeline',
+          clause: 'Queue Filter: Amount > ₹10,00,000',
           source: 'KTWPL Back-Office Maker-Checker Engine',
         },
       ],
@@ -157,15 +298,19 @@ export function queryRag(queryText: string, userRole: string, activeSimulatorAmo
     };
   }
 
-  // 5. Admin: Summarize liquidity outflows for next week
-  if (query.includes('outflows') || query.includes('liquidity') || query.includes('next week') || query.includes('treasury')) {
+  // Admin Q2: Summarize liquidity outflows for next week.
+  if (
+    (q.includes('liquidity') && q.includes('outflows')) ||
+    (q.includes('outflows') && q.includes('next week')) ||
+    q.includes('summarize liquidity outflows')
+  ) {
     return {
-      answer: `Here is the Treasury Liquidity Summary for **Next Week (Week 1: Oct 28 - Nov 03)**:\n\n- **Total Projected Outflows:** **₹19,85,000**\n  - Scheduled Monthly Interest: **₹4,85,000** across 12 client mandates\n  - Pending Redemption Claim: **₹15,00,000** (#WR-1049)\n- **Available Liquidity Reserves:** **₹8.42 Crores** (HDFC Escrow + Liquid Overnight Funds)\n- **Coverage Ratio:** **424%** (Well above SEBI requirement of 120% minimum liquidity buffer).\n\nNo treasury stress is detected for the rolling 90-day horizon.`,
+      answer: `Based on the illustrative forecast, expected outflows for **29 October–4 November 2026** are **₹1.85 crore**.\n\n• **Projected total outflow:** ₹1.85 Cr\n• **Interest payouts:** ₹65 lakh\n• **Maturities:** ₹80 lakh\n• **Withdrawals:** ₹40 lakh`,
       citations: [
         {
           label: 'Treasury Risk Model',
-          clause: 'Section 3.1 Liquidity Forecast',
-          source: 'KTWPL Treasury Risk & Outflow Matrix 2026-Q4',
+          clause: 'Section 3.1 Rolling 7-Day Outflow',
+          source: 'KTWPL Treasury Risk & Liquidity Matrix 2026-Q4',
         },
       ],
       quickActions: [
@@ -174,24 +319,125 @@ export function queryRag(queryText: string, userRole: string, activeSimulatorAmo
     };
   }
 
-  // Fallback answer with contextual intelligence
+  // Admin Q3: How much new capital came in today?
+  if (
+    (q.includes('capital') && (q.includes('today') || q.includes('came in'))) ||
+    q.includes('inflows today') ||
+    q.includes('how much new capital')
+  ) {
+    return {
+      answer: `Today's illustrative fund inflows total **₹3.25 crore** across 8 transactions.\n\n• **Approved and reconciled:** ₹2.10 crore\n• **Awaiting checker approval:** ₹85 lakh\n• **Receipt reconciliation pending:** ₹30 lakh`,
+      citations: [
+        {
+          label: 'Inflow Intake Register',
+          clause: 'Daily Reconciled Batch #IN-2026-10-28',
+          source: 'HDFC Capital Inward Clearing / RTGS Feeds',
+        },
+      ],
+      quickActions: [
+        { label: 'Open Inflow Intake Wizard', actionType: 'NAVIGATE', payload: 'admin' },
+        { label: 'View Maker Queue', actionType: 'NAVIGATE', payload: 'admin' },
+      ],
+    };
+  }
+
+  // Admin Q4: Which investors have incomplete KYC?
+  if (
+    (q.includes('investor') || q.includes('which')) && (q.includes('incomplete kyc') || q.includes('kyc') || q.includes('pending verification')) ||
+    q.includes('incomplete kyc')
+  ) {
+    return {
+      answer: `The illustrative compliance register contains **86 investors with pending verification** and **35 with failed or flagged checks**.\n\n**Recommended next steps:**\n1. Review pending CKYC, PAN and bank verification cases.\n2. Identify failed checks requiring document correction or manual review.\n3. Assign follow-up tasks to authorized staff.\n4. Restrict actions where required by approved compliance policy.`,
+      citations: [
+        {
+          label: 'SEBI Compliance Registry',
+          clause: 'PMLA & CKYC Master Audit Table',
+          source: 'SEBI KYC Registry & Karvy KRA API Gateway',
+        },
+      ],
+      quickActions: [
+        { label: 'Open KYC Matrix', actionType: 'NAVIGATE', payload: 'compliance' },
+      ],
+    };
+  }
+
+  // Admin Q5: Why is a withdrawal request pending?
+  if (
+    (q.includes('why') && q.includes('withdrawal') && q.includes('pending')) ||
+    q.includes('wr 7781') ||
+    q.includes('why is a withdrawal request pending')
+  ) {
+    return {
+      answer: `Request **WR-7781** is awaiting checker approval in the illustrative workflow.\n\n• **Requested amount:** ₹25,00,000\n• **Submission date:** 27 October 2026\n• **Current status:** Pending checker approval\n• **Next action:** An authorized checker must review eligibility, available balance and supporting records.`,
+      citations: [
+        {
+          label: 'Workflow Audit Trail',
+          clause: 'Ticket #WR-7781 Seasoning Check',
+          source: 'Maker-Checker Execution Log #MC-9021',
+        },
+      ],
+      quickActions: [
+        { label: 'Review Request WR-7781', actionType: 'NAVIGATE', payload: 'admin' },
+      ],
+    };
+  }
+
+  // Admin Q6: Which agreements mature in the next 30 days?
+  if (
+    (q.includes('agreements') || q.includes('mature')) && (q.includes('30 days') || q.includes('next 30')) ||
+    q.includes('which agreements mature in the next 30 days') ||
+    q.includes('upcoming maturities')
+  ) {
+    return {
+      answer: `The illustrative maturity register identifies **12 agreements** maturing within the requested period, with aggregate principal of **₹4.60 crore**.\n\n**Before processing, review:**\n• Contractual maturity dates and principal amounts.\n• Final interest accruals and applicable deductions.\n• Investor bank-account verification.\n• Renewal instructions, if any.\n• Available liquidity and maker-checker approvals.`,
+      citations: [
+        {
+          label: 'Maturity Ledger',
+          clause: 'Schedule 30D Liquidity Allocation',
+          source: 'KTWPL Escrow Depository Register',
+        },
+      ],
+      quickActions: [
+        { label: 'View Liquidity Forecast', actionType: 'NAVIGATE', payload: 'admin' },
+      ],
+    };
+  }
+
+  // General Tax / TDS query
+  if (q.includes('tax') || q.includes('tds') || q.includes('194a')) {
+    return {
+      answer: `Interest payouts are subject to statutory withholding under **Section 194A** at **10.0%** for Resident Individuals with verified PAN.\n\n• Form 16A certificates are published quarterly in the Digital Agreement Vault.\n• Valid Form 15G / 15H can be submitted at the start of the financial year for nil withholding.`,
+      citations: [
+        {
+          label: 'Tax Policy Document',
+          clause: 'Section 194A IT Act',
+          source: 'KTWPL Statutory Tax Advisory 2026',
+        },
+      ],
+      quickActions: [
+        { label: 'View Digital Vault', actionType: 'OPEN_AGREEMENT', payload: 'AG-8912' },
+        { label: 'View General Ledger', actionType: 'VIEW_LEDGER' },
+      ],
+    };
+  }
+
+  // Fallback response with contextual hints
   const simNote = activeSimulatorAmount 
-    ? `\n\n*(Note: I noticed your current active simulation parameter is set to ₹${(activeSimulatorAmount/100000).toFixed(1)} Lakhs. You can ask me to calculate exact tax yields or compare compounding on this amount.)*`
+    ? `\n\n*(Note: Your current simulation parameter is set to ₹${(activeSimulatorAmount/100000).toFixed(1)} Lakhs. You can ask me to calculate returns or compare tenors on this amount.)*`
     : '';
 
   return {
-    answer: `I have analyzed your query across KTWPL's digitized master agreements, SEBI regulatory circulars, and the General Ledger database.\n\nCould you please specify if you would like details regarding **Agreement #AG-8912**, **tax withholding rules (TDS u/s 194A)**, **Maker-Checker approvals**, or **custom wealth simulation projections**?${simNote}`,
+    answer: `I have analyzed your query across KTWPL's digitized master agreements, General Ledger records, and SEBI compliance databases.\n\nYou can ask any of our standard demo queries such as payout schedules for **Agreement #AG-8912**, cumulative accrued interest, 12-month return estimates, pending withdrawals above ₹10L, or liquidity forecasts.${simNote}`,
     citations: [
       {
         label: 'KTWPL Knowledge Base',
-        source: 'Master Agreement Repository & Regulatory Matrix',
+        source: 'Master Mandate Repository & Regulatory Directives',
       },
     ],
     quickActions: [
-      { label: 'Check Next Payout', actionType: 'OPEN_AGREEMENT', payload: 'AG-8912' },
-      { label: 'Launch Wealth Simulator', actionType: 'SIMULATE' },
-      { label: 'View General Ledger', actionType: 'VIEW_LEDGER' },
+      { label: 'When is my next interest payout for Agreement #AG-8912?', actionType: 'PROMPT' },
+      { label: 'How much interest have I earned so far?', actionType: 'PROMPT' },
+      { label: 'Show all pending withdrawal requests above ₹10 lakh.', actionType: 'PROMPT' },
     ],
   };
 }
-

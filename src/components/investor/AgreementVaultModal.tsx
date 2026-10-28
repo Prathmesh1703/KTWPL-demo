@@ -52,8 +52,8 @@ export const AgreementVaultModal: React.FC<AgreementVaultModalProps> = ({
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title={`Digitized Note Mandate #${agreement.agreementNo}`}
-      subtitle="Cryptographically sealed capital deployment contract under Indian Stamp Act 1899"
+      title={`Investment Agreement #${agreement.agreementNo}`}
+      subtitle="Digitally signed investment agreement contract under Indian Stamp Act 1899"
       maxWidth="max-w-2xl"
     >
       <div className="space-y-5">
@@ -108,7 +108,7 @@ export const AgreementVaultModal: React.FC<AgreementVaultModalProps> = ({
               <strong className="text-ink-primary block mb-0.5">
                 Clause 4.2 — Interest Accrual & Escrow Mandate:
               </strong>
-              Interest on the principal deployment of {formatINR(agreement.principalAmount)} shall accrue at 
+              Interest on the principal investment of {formatINR(agreement.principalAmount)} shall accrue at 
               the agreed annual rate of {formatPercent(agreement.interestRateAnnual)} and be remitted on a {agreement.periodicity.toLowerCase()} cycle directly to the investor's verified bank escrow mandate.
             </div>
 
@@ -125,7 +125,7 @@ export const AgreementVaultModal: React.FC<AgreementVaultModalProps> = ({
                 Clause 9.1 — Tax Withholding (TDS):
               </strong>
               In accordance with Section 194A of the Income Tax Act 1961, TDS shall be withheld at {formatPercent(agreement.clauses.tdsRatePercent)} 
-              on all credited yield. Form 16A certificates shall be auto-published quarterly in the digital vault.
+              on all credited yield. Form 16A certificates shall be auto-published quarterly in your account.
             </div>
           </div>
         </div>

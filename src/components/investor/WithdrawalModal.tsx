@@ -89,7 +89,7 @@ export const WithdrawalModal: React.FC<WithdrawalModalProps> = ({
         {/* Select Active Agreement */}
         <div>
           <label className="block text-xs text-ink-secondary font-medium mb-1.5">
-            Select Active Mandate Agreement
+            Select Active Investment Agreement
           </label>
           <select
             value={selectedAgreementId}

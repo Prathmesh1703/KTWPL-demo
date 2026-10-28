@@ -46,7 +46,7 @@ export const HeroPortfolioCard: React.FC<HeroPortfolioCardProps> = ({
           {/* Section B — Primary financial metric */}
           <div>
             <div className="text-xs text-ink-secondary font-normal mb-1">
-              Total Active Capital Deployed
+              Total Active Investment
             </div>
             <div className="flex items-baseline gap-3 flex-wrap">
               <span className="text-3xl sm:text-4xl font-semibold text-ink-primary font-mono tracking-tight tabular-nums">
@@ -130,7 +130,7 @@ export const HeroPortfolioCard: React.FC<HeroPortfolioCardProps> = ({
               className="flex-1 py-2 px-3 rounded-lg bg-gold-500 hover:bg-gold-600 text-[#080B12] font-semibold text-xs transition-colors flex items-center justify-center gap-1.5"
             >
               <Calculator className="w-3.5 h-3.5" />
-              <span>Simulate</span>
+              <span>Wealth & Payout</span>
             </button>
 
             <button

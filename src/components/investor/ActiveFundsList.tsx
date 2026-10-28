@@ -55,21 +55,14 @@ export const ActiveFundsList: React.FC<ActiveFundsListProps> = ({
 
   return (
     <div className="space-y-4">
-      {/* Section Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
-        <div>
-          <h3 className="text-base font-semibold text-ink-primary tracking-tight">
-            Active Deployments & Notes
-          </h3>
-          <p className="text-xs text-ink-secondary">
-            Deposit mandates with automated interest distribution cycles and cryptographic hash proofs.
-          </p>
-        </div>
-
-        {/* Global Cycle Countdown */}
-        <div className="flex items-center gap-1.5 text-xs text-ink-secondary font-mono">
+      {/* Status Bar with Live Countdown */}
+      <div className="flex items-center justify-between text-xs text-ink-secondary font-mono">
+        <span className="text-xs text-ink-muted font-sans font-medium">
+          Active Plans ({agreements.length})
+        </span>
+        <div className="flex items-center gap-1.5">
           <Clock className="w-3.5 h-3.5 text-gold-500" />
-          <span>Next Cycle:</span>
+          <span>Next Payout:</span>
           <span className="font-semibold text-ink-primary">
             {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
           </span>
@@ -105,7 +98,7 @@ export const ActiveFundsList: React.FC<ActiveFundsListProps> = ({
 
                 {/* Principal Amount */}
                 <div className="mb-4">
-                  <div className="text-[11px] text-ink-muted">Principal Sum</div>
+                  <div className="text-[11px] text-ink-muted">Investment Amount</div>
                   <div className="text-xl font-semibold text-ink-primary font-mono mt-0.5 tabular-nums">
                     {formatINR(ag.principalAmount)}
                   </div>
@@ -114,28 +107,28 @@ export const ActiveFundsList: React.FC<ActiveFundsListProps> = ({
                 {/* Details Grid */}
                 <div className="grid grid-cols-2 gap-2.5 p-3 rounded-lg bg-surface border border-subtle mb-4 text-xs font-mono">
                   <div>
-                    <span className="text-[10px] text-ink-muted block font-sans">Yield Rate</span>
+                    <span className="text-[10px] text-ink-muted block font-sans">Interest Rate</span>
                     <span className="font-medium text-emerald-500 mt-0.5 block tabular-nums">
                       {ag.interestRateAnnual.toFixed(2)}% p.a.
                     </span>
                   </div>
 
                   <div>
-                    <span className="text-[10px] text-ink-muted block font-sans">Next Interest Date</span>
+                    <span className="text-[10px] text-ink-muted block font-sans">Next Payout Date</span>
                     <span className="font-medium text-ink-secondary mt-0.5 block">
                       {formatDate(ag.nextPayoutDate)}
                     </span>
                   </div>
 
                   <div>
-                    <span className="text-[10px] text-ink-muted block font-sans">Accrued Cycle</span>
+                    <span className="text-[10px] text-ink-muted block font-sans">Earned Interest</span>
                     <span className="font-medium text-ink-primary mt-0.5 block tabular-nums">
                       {formatINR(ag.accruedInterest)}
                     </span>
                   </div>
 
                   <div>
-                    <span className="text-[10px] text-ink-muted block font-sans">Seasoning Lock-in</span>
+                    <span className="text-[10px] text-ink-muted block font-sans">Lock-in Period</span>
                     <span className="font-medium text-ink-secondary mt-0.5 block">
                       {ag.clauses.lockInPeriodMonths}m (Cleared)
                     </span>
@@ -161,7 +154,7 @@ export const ActiveFundsList: React.FC<ActiveFundsListProps> = ({
                 </button>
 
                 <span className="text-xs font-medium text-gold-500 flex items-center gap-1 group-hover:underline">
-                  <span>View Terms</span>
+                  <span>View Agreement</span>
                   <ExternalLink className="w-3 h-3" />
                 </span>
               </div>

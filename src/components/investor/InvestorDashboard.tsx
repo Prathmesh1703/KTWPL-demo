@@ -102,34 +102,25 @@ export const InvestorDashboard: React.FC<InvestorDashboardProps> = ({
     return null;
   };
 
-  // 1. DEDICATED WEALTH SIMULATOR VIEW
+  // 1. DEDICATED WEALTH AND PAYOUT VIEW
   if (activeSubTab === 'simulator') {
     return (
       <div className="space-y-6 pb-16">
-        <div className="flex items-center justify-between pb-2 border-b border-subtle">
-          <div>
-            <h2 className="text-xl font-semibold text-ink-primary tracking-tight flex items-center gap-2">
-              <Calculator className="w-5 h-5 text-gold-500" />
-              Wealth & Payout Simulator
-            </h2>
-            <p className="text-xs text-ink-secondary">
-              Calculate projected coupon yields, compounding schedules, and Section 194A TDS withholdings.
-            </p>
-          </div>
-          <button
-            onClick={() => onOpenCopilotWithPrompt?.('Can you calculate the post-tax return on ₹50 Lakhs for 24 months?')}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-elevated hover:brightness-105 border border-subtle text-xs text-gold-500 transition-colors"
-          >
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Ask Copilot to Simulate</span>
-          </button>
+        <div className="pb-2 border-b border-subtle">
+          <h2 className="text-xl font-semibold text-ink-primary tracking-tight flex items-center gap-2">
+            <Calculator className="w-5 h-5 text-gold-500" />
+            Wealth and Payout
+          </h2>
+          <p className="text-xs text-ink-secondary">
+            Calculate projected interest earnings, payouts, and maturity returns.
+          </p>
         </div>
         <WealthSimulator onNotifyCopilot={onSimulatorParamChange} />
       </div>
     );
   }
 
-  // 2. DEDICATED ACTIVE VAULT & NOTES VIEW
+  // 2. DEDICATED INVESTMENTS VIEW
   if (activeSubTab === 'agreements') {
     return (
       <div className="space-y-6 pb-16">
@@ -137,10 +128,10 @@ export const InvestorDashboard: React.FC<InvestorDashboardProps> = ({
           <div>
             <h2 className="text-xl font-semibold text-ink-primary tracking-tight flex items-center gap-2">
               <FileText className="w-5 h-5 text-gold-500" />
-              Active Notes & Digitized Vault
+              Investments
             </h2>
             <p className="text-xs text-ink-secondary">
-              Review digitized mandate contracts, cryptographic SHA-256 seals, and eMudhra Aadhaar signatures.
+              View your active investments and agreement terms.
             </p>
           </div>
 
@@ -152,7 +143,7 @@ export const InvestorDashboard: React.FC<InvestorDashboardProps> = ({
               onChange={e => setAgreementFilter(e.target.value)}
               className="px-2.5 py-1.5 rounded-lg bg-surface border border-subtle text-xs text-ink-secondary focus:outline-none"
             >
-              <option value="ALL">All Notes ({agreements.length})</option>
+              <option value="ALL">All Investments ({agreements.length})</option>
               <option value="MONTHLY">Monthly Disbursed</option>
               <option value="QUARTERLY">Quarterly Compounded</option>
               <option value="MATURITY_COMPOUND">Cumulative</option>
@@ -178,23 +169,14 @@ export const InvestorDashboard: React.FC<InvestorDashboardProps> = ({
   if (activeSubTab === 'ledger') {
     return (
       <div className="space-y-6 pb-16">
-        <div className="flex items-center justify-between pb-2 border-b border-subtle">
-          <div>
-            <h2 className="text-xl font-semibold text-ink-primary tracking-tight flex items-center gap-2">
-              <ReceiptText className="w-5 h-5 text-gold-500" />
-              Institutional General Ledger
-            </h2>
-            <p className="text-xs text-ink-secondary">
-              Verified double-entry credits, debits, statutory TDS Section 194A deductions, and settlement proofs.
-            </p>
-          </div>
-          <button
-            onClick={() => onOpenCopilotWithPrompt?.('Show me the latest interest credit transaction from my ledger')}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-elevated hover:brightness-105 border border-subtle text-xs text-gold-500 transition-colors"
-          >
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Audit with Copilot</span>
-          </button>
+        <div className="pb-2 border-b border-subtle">
+          <h2 className="text-xl font-semibold text-ink-primary tracking-tight flex items-center gap-2">
+            <ReceiptText className="w-5 h-5 text-gold-500" />
+            Institutional General Ledger
+          </h2>
+          <p className="text-xs text-ink-secondary">
+            Verified double-entry credits, debits, statutory TDS Section 194A deductions, and settlement proofs.
+          </p>
         </div>
         <GeneralLedgerTable entries={ledgerEntries} />
       </div>
@@ -303,9 +285,9 @@ export const InvestorDashboard: React.FC<InvestorDashboardProps> = ({
         onOpenVault={() => handleOpenAgreementVault(agreements[0])}
       />
 
-      {/* 2. Interactive Charts & Asset Breakdown Row */}
+      {/* 2. Three Overview Cards (Mandate Capital Deployment, Instant Copilot Queries, Active Deployments Summary) - COMMENTED OUT AS REQUESTED */}
+      {/*
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
-        {/* Left Column: Asset Allocation Donut Chart (5 Cols) */}
         <GlassCard className="lg:col-span-5 p-5 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between pb-3 border-b border-subtle">
@@ -354,9 +336,7 @@ export const InvestorDashboard: React.FC<InvestorDashboardProps> = ({
           </div>
         </GlassCard>
 
-        {/* Right Column: Quick Interactive Actions & Next Cycle Preview (7 Cols) */}
         <div className="lg:col-span-7 flex flex-col justify-between gap-4">
-          {/* Quick AI Prompts Card */}
           <GlassCard className="p-5">
             <div className="flex items-center justify-between pb-3 border-b border-subtle">
               <div className="flex items-center gap-2 text-xs font-semibold text-ink-primary">
@@ -419,7 +399,6 @@ export const InvestorDashboard: React.FC<InvestorDashboardProps> = ({
             </div>
           </GlassCard>
 
-          {/* Quick Active Notes Teaser */}
           <GlassCard className="p-5 flex-1 flex flex-col justify-between">
             <div className="flex items-center justify-between pb-3 border-b border-subtle">
               <h3 className="text-sm font-semibold text-ink-primary flex items-center gap-2">
@@ -455,9 +434,10 @@ export const InvestorDashboard: React.FC<InvestorDashboardProps> = ({
           </GlassCard>
         </div>
       </div>
+      */}
 
-      {/* 3. Wealth Simulator Section */}
-      <div id="wealth-simulator-section">
+      {/* 2. Wealth and Payout Section */}
+      <div id="wealth-payout-section">
         <WealthSimulator onNotifyCopilot={onSimulatorParamChange} />
       </div>
 

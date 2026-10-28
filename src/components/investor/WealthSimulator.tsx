@@ -14,10 +14,9 @@ import {
   CartesianGrid
 } from 'recharts';
 import { 
-  Calculator, 
-  ArrowRight,
   TrendingUp,
-  Percent
+  ArrowRight,
+  Sparkles
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -56,16 +55,16 @@ export const WealthSimulator: React.FC<WealthSimulatorProps> = ({ onNotifyCopilo
     if (onNotifyCopilot) onNotifyCopilot(principal, newTenor);
   };
 
-  const handleLockMandate = () => {
+  const handleSavePlan = () => {
     confetti({
-      particleCount: 40,
-      spread: 60,
+      particleCount: 35,
+      spread: 55,
       origin: { y: 0.7 },
       colors: ['#C6A45C', '#10B981'],
     });
     toast.success(
-      'Mandate Parameters Saved',
-      `Model updated for ₹${(principal / 100000).toFixed(1)}L at ${result.rateAnnual.toFixed(2)}% p.a. for ${tenorMonths} months.`
+      'Investment Plan Saved',
+      `Plan configured for ₹${(principal / 100000).toFixed(1)}L at ${result.rateAnnual.toFixed(2)}% p.a. for ${tenorMonths} months.`
     );
   };
 
@@ -73,15 +72,15 @@ export const WealthSimulator: React.FC<WealthSimulatorProps> = ({ onNotifyCopilo
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="p-3 rounded-lg bg-card border border-subtle shadow-dropdown text-xs">
-          <p className="font-mono text-ink-muted text-[11px] mb-1.5">{label}</p>
-          <div className="space-y-1 font-mono">
+        <div className="p-2.5 rounded-lg bg-card border border-subtle shadow-dropdown text-xs font-mono">
+          <p className="text-ink-muted text-[11px] mb-1">{label}</p>
+          <div className="space-y-0.5">
             <p className="text-ink-secondary">
-              Cumulative Value: <span className="font-semibold text-ink-primary">{formatINR(payload[0]?.value || 0)}</span>
+              Total Value: <span className="font-semibold text-ink-primary">{formatINR(payload[0]?.value || 0)}</span>
             </p>
             {payload[1] && (
               <p className="text-emerald-500">
-                Interest Accrued: <span className="font-semibold">{formatINR(payload[1]?.value || 0)}</span>
+                Interest: <span className="font-semibold">{formatINR(payload[1]?.value || 0)}</span>
               </p>
             )}
           </div>
@@ -93,37 +92,39 @@ export const WealthSimulator: React.FC<WealthSimulatorProps> = ({ onNotifyCopilo
 
   return (
     <GlassCard className="p-6 sm:p-7">
-      {/* Header with Title and Yield Assumption */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-5 border-b border-subtle">
-        <div>
-          <div className="flex items-center gap-2 mb-1">
-            <Calculator className="w-4 h-4 text-gold-500" />
-            <h2 className="text-base font-semibold text-ink-primary tracking-tight">
-              Wealth & Payout Simulator
-            </h2>
+      {/* Header: Title and Yield */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-5 border-b border-subtle">
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-lg bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-500">
+            <TrendingUp className="w-4 h-4" />
           </div>
-          <p className="text-xs text-ink-secondary">
-            Model capital allocation yields with monthly disbursement or quarterly compounding options.
-          </p>
+          <div>
+            <h2 className="text-base font-semibold text-ink-primary tracking-tight">
+              Wealth and Payout
+            </h2>
+            <p className="text-xs text-ink-secondary">
+              Calculate your expected interest earnings, payouts, and maturity returns.
+            </p>
+          </div>
         </div>
 
         <div className="flex items-center gap-2 font-mono text-xs text-ink-secondary">
-          <span>Indicated Coupon:</span>
+          <span>Expected Return:</span>
           <span className="font-semibold text-emerald-500 bg-emerald-500/10 px-2.5 py-0.5 rounded border border-emerald-500/20">
             {result.rateAnnual.toFixed(2)}% p.a.
           </span>
         </div>
       </div>
 
-      {/* Inputs vs Results Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-6">
-        {/* Left Side: Inputs (5 Cols) */}
+      {/* Main Grid: Controls vs Visual Output */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-7 pt-6">
+        {/* Left Column: Interactive Inputs (5 Cols) */}
         <div className="lg:col-span-5 space-y-5">
-          {/* Investment Amount Slider & Presets */}
-          <div className="space-y-2.5">
+          {/* Investment Amount Slider & Flat Presets */}
+          <div className="space-y-2">
             <div className="flex items-center justify-between">
               <label className="text-xs text-ink-secondary font-medium">
-                Allocation Amount
+                Investment Amount
               </label>
               <span className="text-base font-mono font-semibold text-ink-primary tabular-nums">
                 {formatINR(principal)}
@@ -140,7 +141,7 @@ export const WealthSimulator: React.FC<WealthSimulatorProps> = ({ onNotifyCopilo
               className="w-full h-1.5 bg-elevated rounded-lg appearance-none cursor-pointer accent-[#C6A45C] focus:outline-none"
             />
 
-            {/* Presets - Simple & Flat */}
+            {/* Quick Presets */}
             <div className="grid grid-cols-6 gap-1.5 pt-1">
               {presetAmounts.map(preset => (
                 <button
@@ -159,11 +160,11 @@ export const WealthSimulator: React.FC<WealthSimulatorProps> = ({ onNotifyCopilo
             </div>
           </div>
 
-          {/* Tenor Segmented Control */}
-          <div className="space-y-2">
+          {/* Tenor / Duration */}
+          <div className="space-y-1.5">
             <div className="flex items-center justify-between">
               <label className="text-xs text-ink-secondary font-medium">
-                Deployment Tenor
+                Duration
               </label>
               <span className="text-xs font-mono text-ink-primary font-medium">
                 {tenorMonths} Months
@@ -188,8 +189,8 @@ export const WealthSimulator: React.FC<WealthSimulatorProps> = ({ onNotifyCopilo
             </div>
           </div>
 
-          {/* Payout Frequency Segmented Control */}
-          <div className="space-y-2">
+          {/* Payout Frequency */}
+          <div className="space-y-1.5">
             <label className="text-xs text-ink-secondary font-medium">
               Payout Frequency
             </label>
@@ -205,7 +206,6 @@ export const WealthSimulator: React.FC<WealthSimulatorProps> = ({ onNotifyCopilo
                 }`}
               >
                 <div>Monthly</div>
-                <div className="text-[10px] text-ink-muted font-mono">Disbursed</div>
               </button>
 
               <button
@@ -218,7 +218,6 @@ export const WealthSimulator: React.FC<WealthSimulatorProps> = ({ onNotifyCopilo
                 }`}
               >
                 <div>Quarterly</div>
-                <div className="text-[10px] text-ink-muted font-mono">Compounded</div>
               </button>
 
               <button
@@ -230,63 +229,62 @@ export const WealthSimulator: React.FC<WealthSimulatorProps> = ({ onNotifyCopilo
                     : 'text-ink-muted hover:text-ink-secondary'
                 }`}
               >
-                <div>Cumulative</div>
-                <div className="text-[10px] text-ink-muted font-mono">At Maturity</div>
+                <div>At Maturity</div>
               </button>
             </div>
           </div>
 
-          {/* Action Trigger */}
+          {/* Save Action */}
           <button
-            onClick={handleLockMandate}
-            className="w-full py-2.5 px-4 rounded-lg bg-gold-500 hover:bg-gold-600 text-[#080B12] font-semibold text-xs tracking-normal flex items-center justify-center gap-1.5 transition-colors shadow-sm"
+            onClick={handleSavePlan}
+            className="w-full py-2.5 px-4 rounded-lg bg-gold-500 hover:bg-gold-600 text-[#080B12] font-semibold text-xs flex items-center justify-center gap-1.5 transition-colors shadow-sm cursor-pointer"
           >
-            <span>Save Simulation Parameters</span>
+            <span>Save Investment Plan</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
 
-        {/* Right Side: Projected Output Summary & Chart (7 Cols) */}
-        <div className="lg:col-span-7 flex flex-col justify-between space-y-5">
-          {/* Primary Projection Summary Box */}
+        {/* Right Column: Visual Summary & Area Chart (7 Cols) */}
+        <div className="lg:col-span-7 flex flex-col justify-between space-y-4">
+          {/* Key Output Metrics Row */}
           <div className="p-4 rounded-lg bg-surface border border-subtle">
-            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 pb-3 border-b border-subtle">
+            <div className="flex items-baseline justify-between gap-2 pb-3 border-b border-subtle">
               <div>
-                <span className="text-[11px] text-ink-muted uppercase font-mono">
-                  Projected Maturity Value
+                <span className="text-[10px] text-ink-muted uppercase font-mono tracking-wider">
+                  Projected Total Return
                 </span>
                 <div className="text-2xl sm:text-3xl font-semibold text-ink-primary font-mono tabular-nums mt-0.5">
                   {formatINR(result.maturityPayout + (periodicity !== 'MATURITY_COMPOUND' ? result.netInterestTotal : 0))}
                 </div>
               </div>
 
-              <div className="text-left sm:text-right">
-                <span className="text-[11px] text-ink-muted uppercase font-mono">Effective Annual Yield</span>
+              <div className="text-right">
+                <span className="text-[10px] text-ink-muted uppercase font-mono tracking-wider">Annual Yield</span>
                 <div className="text-lg font-semibold text-emerald-500 font-mono mt-0.5">
                   {result.rateAnnual.toFixed(2)}%
                 </div>
               </div>
             </div>
 
-            {/* Supporting Financial Metrics */}
-            <div className="grid grid-cols-3 gap-4 pt-3 text-xs font-mono">
+            {/* 3 Quick Stats */}
+            <div className="grid grid-cols-3 gap-3 pt-3 text-xs font-mono">
               <div>
-                <div className="text-[11px] text-ink-muted font-sans">Principal Allocation</div>
+                <div className="text-[10px] text-ink-muted font-sans">Investment</div>
                 <div className="font-medium text-ink-secondary mt-0.5 tabular-nums">
                   {formatINR(principal)}
                 </div>
               </div>
 
               <div>
-                <div className="text-[11px] text-ink-muted font-sans">Gross Interest Earned</div>
+                <div className="text-[10px] text-ink-muted font-sans">Total Interest</div>
                 <div className="font-medium text-emerald-500 mt-0.5 tabular-nums">
                   +{formatINR(result.grossInterestTotal)}
                 </div>
               </div>
 
               <div>
-                <div className="text-[11px] text-ink-muted font-sans">
-                  {periodicity === 'MONTHLY' ? 'Net Monthly Inflow' : 'Net After TDS (10%)'}
+                <div className="text-[10px] text-ink-muted font-sans">
+                  {periodicity === 'MONTHLY' ? 'Monthly Payout' : 'Net Returns'}
                 </div>
                 <div className="font-medium text-ink-primary mt-0.5 tabular-nums">
                   {periodicity === 'MONTHLY'
@@ -297,22 +295,22 @@ export const WealthSimulator: React.FC<WealthSimulatorProps> = ({ onNotifyCopilo
             </div>
           </div>
 
-          {/* Clean Recharts Area Chart */}
+          {/* Interactive Recharts Area Chart */}
           <div className="p-3 rounded-lg bg-surface border border-subtle">
             <div className="h-52 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={result.schedule} margin={{ top: 8, right: 10, left: -10, bottom: 0 }}>
                   <defs>
                     <linearGradient id="goldSubtleGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#C6A45C" stopOpacity={0.2} />
+                      <stop offset="5%" stopColor="#C6A45C" stopOpacity={0.25} />
                       <stop offset="95%" stopColor="#C6A45C" stopOpacity={0.0} />
                     </linearGradient>
                     <linearGradient id="emeraldSubtleGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#10B981" stopOpacity={0.2} />
+                      <stop offset="5%" stopColor="#10B981" stopOpacity={0.25} />
                       <stop offset="95%" stopColor="#10B981" stopOpacity={0.0} />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(148, 163, 184, 0.1)" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(148, 163, 184, 0.08)" />
                   <XAxis
                     dataKey="monthLabel"
                     tick={{ fill: '#64748B', fontSize: 10, fontFamily: 'monospace' }}
@@ -328,7 +326,7 @@ export const WealthSimulator: React.FC<WealthSimulatorProps> = ({ onNotifyCopilo
                   <Area
                     type="monotone"
                     dataKey="cumulativeWealth"
-                    name="Projected Value"
+                    name="Total Value"
                     stroke="#C6A45C"
                     strokeWidth={2}
                     fillOpacity={1}
@@ -337,7 +335,7 @@ export const WealthSimulator: React.FC<WealthSimulatorProps> = ({ onNotifyCopilo
                   <Area
                     type="monotone"
                     dataKey="cumulativeInterest"
-                    name="Interest Accrued"
+                    name="Interest Earned"
                     stroke="#10B981"
                     strokeWidth={1.5}
                     fillOpacity={1}
@@ -348,9 +346,9 @@ export const WealthSimulator: React.FC<WealthSimulatorProps> = ({ onNotifyCopilo
             </div>
           </div>
 
-          {/* Understated Disclaimer */}
-          <p className="text-[10px] text-ink-muted">
-            *Illustrative projection calculated according to indicative coupon yields and statutory Section 194A TDS withholding (10%). Not a guaranteed return.
+          {/* Understated minimal 1-line note */}
+          <p className="text-[10px] text-ink-muted font-sans">
+            *Illustrative projections based on {result.rateAnnual.toFixed(2)}% annual yield before statutory TDS.
           </p>
         </div>
       </div>

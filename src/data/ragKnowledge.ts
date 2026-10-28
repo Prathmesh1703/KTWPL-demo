@@ -181,7 +181,7 @@ export function queryRag(queryText: string, userRole: string, activeSimulatorAmo
       ],
       quickActions: [
         { label: 'View General Ledger', actionType: 'VIEW_LEDGER' },
-        { label: 'Simulate Future Yield', actionType: 'SIMULATE' },
+        { label: 'Calculate Future Returns', actionType: 'SIMULATE' },
       ],
     };
   }
@@ -202,8 +202,8 @@ export function queryRag(queryText: string, userRole: string, activeSimulatorAmo
         },
       ],
       quickActions: [
-        { label: 'Launch Wealth Simulator', actionType: 'SIMULATE', payload: { principal: 1000000, tenor: 12 } },
-        { label: 'View Active Vault', actionType: 'OPEN_AGREEMENT' },
+        { label: 'Open Wealth and Payout', actionType: 'SIMULATE', payload: { principal: 1000000, tenor: 12 } },
+        { label: 'View Investments', actionType: 'OPEN_AGREEMENT' },
       ],
     };
   }
@@ -415,7 +415,7 @@ export function queryRag(queryText: string, userRole: string, activeSimulatorAmo
         },
       ],
       quickActions: [
-        { label: 'View Digital Vault', actionType: 'OPEN_AGREEMENT', payload: 'AG-8912' },
+        { label: 'View Investments', actionType: 'OPEN_AGREEMENT', payload: 'AG-8912' },
         { label: 'View General Ledger', actionType: 'VIEW_LEDGER' },
       ],
     };
@@ -423,7 +423,7 @@ export function queryRag(queryText: string, userRole: string, activeSimulatorAmo
 
   // Fallback response with contextual hints
   const simNote = activeSimulatorAmount 
-    ? `\n\n*(Note: Your current simulation parameter is set to ₹${(activeSimulatorAmount/100000).toFixed(1)} Lakhs. You can ask me to calculate returns or compare tenors on this amount.)*`
+    ? `\n\n*(Note: Your current investment calculation parameter is set to ₹${(activeSimulatorAmount/100000).toFixed(1)} Lakhs. You can ask me to calculate returns or compare tenors on this amount.)*`
     : '';
 
   return {

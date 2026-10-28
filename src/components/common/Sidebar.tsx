@@ -36,8 +36,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   const investorNav = [
     { id: 'overview', label: 'Portfolio Overview', icon: PieChart },
-    { id: 'simulator', label: 'Wealth Simulator', icon: Calculator },
-    { id: 'agreements', label: 'Active Vault & Notes', icon: FileText },
+    { id: 'simulator', label: 'Wealth and Payout', icon: Calculator },
+    { id: 'agreements', label: 'Investments', icon: FileText },
     { id: 'ledger', label: 'General Ledger', icon: ReceiptText },
     { id: 'withdrawals', label: 'Redemptions', icon: ArrowUpRight },
   ];

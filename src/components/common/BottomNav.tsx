@@ -13,8 +13,8 @@ export const BottomNav: React.FC<BottomNavProps> = ({ activeTab, setActiveTab })
 
   const investorItems = [
     { id: 'overview', label: 'Portfolio', icon: PieChart },
-    { id: 'simulator', label: 'Simulator', icon: Calculator },
-    { id: 'agreements', label: 'Vault', icon: FileText },
+    { id: 'simulator', label: 'Wealth & Payout', icon: Calculator },
+    { id: 'agreements', label: 'Investments', icon: FileText },
     { id: 'ledger', label: 'Ledger', icon: ReceiptText },
     { id: 'withdrawals', label: 'Redeem', icon: ArrowUpRight },
   ];

@@ -6,7 +6,6 @@ import {
   Sparkles, 
   X, 
   Send, 
-  ShieldCheck, 
   ArrowRight,
   HelpCircle
 } from 'lucide-react';
@@ -229,26 +228,6 @@ export const KTWPLCopilot: React.FC<KTWPLCopilotProps> = ({
                 }}
               >
                 <div className="whitespace-pre-line font-sans">{msg.text}</div>
-
-                {/* Citations */}
-                {msg.citations && msg.citations.length > 0 && (
-                  <div className="mt-2.5 pt-2 border-t border-subtle space-y-1">
-                    <div className="text-[10px] uppercase font-mono text-ink-muted flex items-center gap-1">
-                      <ShieldCheck className="w-3 h-3 text-emerald-500" />
-                      <span>Verified Citations</span>
-                    </div>
-                    {msg.citations.map((c, i) => (
-                      <div
-                        key={i}
-                        className="text-[10px] p-1.5 rounded bg-canvas border border-subtle font-mono text-ink-muted"
-                        style={{ backgroundColor: 'var(--bg-canvas)' }}
-                      >
-                        <strong className="text-ink-primary block">{c.clause || c.label}:</strong>
-                        <span>{c.source}</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
 
                 {/* Quick Action / Follow-up Buttons */}
                 {msg.quickActions && msg.quickActions.length > 0 && (

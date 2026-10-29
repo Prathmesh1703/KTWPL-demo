@@ -1,4 +1,4 @@
-import { Agreement, LedgerEntry, WithdrawalRequest, InflowProposal, AuditLog, KYCRecord, UserProfile } from '../types';
+import { Agreement, LedgerEntry, WithdrawalRequest, InflowProposal, AuditLog, KYCRecord, UserProfile, MeetingRequest } from '../types';
 
 export const mockCurrentUser: UserProfile = {
   id: 'usr-hni-01',
@@ -484,5 +484,57 @@ export const liveMarketTicker = [
   { symbol: '91-DAY T-BILL', value: '6.51%', change: '+0.01%', isPositive: true },
   { symbol: 'USD/INR', value: '₹84.06', change: '-0.04', isPositive: true },
   { symbol: 'GOLD MCX (10g)', value: '₹78,420', change: '+310 (+0.40%)', isPositive: true },
+];
+
+export const initialMeetings: MeetingRequest[] = [
+  {
+    id: 'mtg-1',
+    meetingNo: 'MTG-8812',
+    investorName: 'Arjun Singhania',
+    investorPan: 'AAACS8912P',
+    investorEmail: 'arjun.singhania@apexholding.in',
+    title: 'Senior Note Yield & Seasoning Review',
+    agenda: 'Review 6-month seasoning completion on Note AG-8912 and discuss roll-over terms.',
+    requestedDate: '2026-10-15',
+    timeSlot: '11:00 AM - 11:45 AM IST',
+    agreementNo: 'AG-8912',
+    status: 'COMPLETED',
+    requestedAt: '2026-10-12T10:30:00+05:30',
+    adminName: 'Siddharth Khosla (Managing Partner)',
+    meetingLink: 'https://meet.ktwpl.com/inst-ag8912',
+    adminFeedback: 'Completed with Relationship Desk. Mandate terms validated.',
+    meetingNotes: 'Reviewed 6-month statutory seasoning completion on Note #AG-8912 (₹75,00,000 at 14.50% p.a.). Client confirmed timely receipt of monthly escrow distributions. Agreed on exploring a 36-month compounded reinvestment tranche at 15.25% p.a. upon April 2026 maturity. Escrow compliance verified with SEBI depository guidelines.',
+  },
+  {
+    id: 'mtg-2',
+    meetingNo: 'MTG-8941',
+    investorName: 'Arjun Singhania',
+    investorPan: 'AAACS8912P',
+    investorEmail: 'arjun.singhania@apexholding.in',
+    title: 'Compounding Vault Trajectory & Tax Planning',
+    agenda: 'Strategic consultation on Note AG-9204 compounding horizon and Form 16A withholding reconciliation.',
+    requestedDate: '2026-11-04',
+    timeSlot: '02:30 PM - 03:15 PM IST',
+    agreementNo: 'AG-9204',
+    status: 'CONFIRMED',
+    requestedAt: '2026-10-25T14:15:00+05:30',
+    adminName: 'Siddharth Khosla (Managing Partner)',
+    meetingLink: 'https://meet.ktwpl.com/inst-ag9204-conf',
+    adminFeedback: 'Meeting confirmed. Institutional RM and Head of Operations will attend.',
+    meetingNotes: 'Pre-Meeting Discussion Brief: Client requested quarterly interest accrual certificates and compounding multiplier forecast on Note #AG-9204 (₹1,50,00,000 principal). TDS deduction u/s 194A certificate will be dispatched prior to call.',
+  },
+  {
+    id: 'mtg-3',
+    meetingNo: 'MTG-9023',
+    investorName: 'Arjun Singhania',
+    investorPan: 'AAACS8912P',
+    investorEmail: 'arjun.singhania@apexholding.in',
+    title: 'New Capital Deployment & Fixed Tenor Allocation',
+    agenda: 'Consultation for onboarding additional ₹50 Lakhs allocation into Senior Fixed Tenor structure with HDFC Escrow clearing.',
+    requestedDate: '2026-11-10',
+    timeSlot: '04:00 PM - 04:45 PM IST',
+    status: 'PENDING_ADMIN',
+    requestedAt: '2026-10-28T16:00:00+05:30',
+  },
 ];
 

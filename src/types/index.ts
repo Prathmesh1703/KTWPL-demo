@@ -143,3 +143,26 @@ export interface ChatMessage {
   }[];
 }
 
+export type MeetingStatus = 'PENDING_ADMIN' | 'CONFIRMED' | 'RESCHEDULED' | 'REJECTED' | 'COMPLETED';
+
+export interface MeetingRequest {
+  id: string;
+  meetingNo: string;
+  investorName: string;
+  investorPan: string;
+  investorEmail: string;
+  title: string;
+  agenda: string;
+  requestedDate: string;
+  timeSlot: string;
+  agreementNo?: string; // Optional: linked investment, e.g. "AG-8912"
+  status: MeetingStatus;
+  requestedAt: string;
+  meetingLink?: string;
+  adminFeedback?: string;
+  adminName?: string;
+  meetingNotes?: string;
+  rescheduledDate?: string;
+  rescheduledTimeSlot?: string;
+}
+

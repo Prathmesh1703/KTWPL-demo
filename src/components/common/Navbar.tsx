@@ -39,7 +39,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCopilot }) => {
   };
 
   return (
-    <header className="w-full bg-surface border-b border-subtle px-5 lg:px-8 py-3 transition-colors shrink-0">
+    <header className="w-full bg-surface/85 backdrop-blur-xl border-b border-subtle px-5 lg:px-8 py-3 transition-colors shrink-0 sticky top-0 z-30">
       <div className="flex items-center justify-between gap-4 max-w-7xl mx-auto">
         {/* Brand Area */}
         <div className="flex items-center gap-3">
@@ -153,16 +153,20 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCopilot }) => {
 
           {/* Profile & Logout */}
           <div className="flex items-center gap-2 pl-2 border-l border-subtle">
-            <div className="w-7 h-7 rounded-lg bg-elevated border border-subtle flex items-center justify-center text-[11px] font-medium text-ink-primary font-mono">
-              {user.name.split(' ').map(n => n[0]).join('')}
+            <div className="w-8 h-8 rounded-lg bg-surface border border-subtle flex items-center justify-center text-xs font-bold text-gold-500 font-mono shadow-sm">
+              {user.name.replace(/[^a-zA-Z\s]/g, '').trim().split(/\s+/).slice(0, 2).map(n => n[0]).join('').toUpperCase() || 'KT'}
             </div>
             <div className="hidden xl:block text-left">
-              <div className="text-xs font-medium text-ink-primary leading-tight">{user.name}</div>
-              <div className="text-[10px] text-ink-muted font-mono leading-tight">{user.clientCode}</div>
+              <div className="text-xs font-semibold text-ink-primary leading-tight">
+                {user.name.split('(')[0].trim()}
+              </div>
+              <div className="text-[10px] text-ink-muted font-mono leading-tight">
+                {role === 'compliance' ? 'Compliance Head' : role === 'admin' ? 'Operations Lead' : user.clientCode}
+              </div>
             </div>
             <button
               onClick={logout}
-              className="p-1.5 text-ink-muted hover:text-ruby-500 transition-colors ml-0.5 rounded-md hover:bg-elevated"
+              className="p-1.5 text-ink-muted hover:text-ruby-400 transition-colors ml-0.5 rounded-md hover:bg-elevated cursor-pointer"
               title="Sign Out"
             >
               <LogOut className="w-3.5 h-3.5" />

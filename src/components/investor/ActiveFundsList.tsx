@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { GlassCard } from '../common/GlassCard';
-import { Agreement } from '../../types';
+import { Agreement, MeetingRequest } from '../../types';
 import { formatINR, truncateHash, formatDate } from '../../utils/formatters';
 import { useToast } from '../../context/ToastContext';
 import { 
@@ -9,17 +9,23 @@ import {
   ExternalLink, 
   Copy, 
   Check, 
-  ShieldCheck
+  ShieldCheck,
+  MessageSquare,
+  Calendar
 } from 'lucide-react';
 
 interface ActiveFundsListProps {
   agreements: Agreement[];
   onSelectAgreement: (agreement: Agreement) => void;
+  meetings?: MeetingRequest[];
+  onOpenMeetingNotes?: (agreement: Agreement) => void;
 }
 
 export const ActiveFundsList: React.FC<ActiveFundsListProps> = ({
   agreements,
   onSelectAgreement,
+  meetings = [],
+  onOpenMeetingNotes,
 }) => {
   const { toast } = useToast();
   const [copiedHash, setCopiedHash] = useState<string | null>(null);
@@ -137,7 +143,7 @@ export const ActiveFundsList: React.FC<ActiveFundsListProps> = ({
               </div>
 
               {/* Card Footer */}
-              <div className="pt-3 border-t border-subtle flex items-center justify-between text-xs">
+              <div className="pt-3 border-t border-subtle flex flex-wrap items-center justify-between gap-2 text-xs">
                 <button
                   type="button"
                   onClick={e => handleCopyHash(ag.cryptoHash, e)}
@@ -153,10 +159,32 @@ export const ActiveFundsList: React.FC<ActiveFundsListProps> = ({
                   )}
                 </button>
 
-                <span className="text-xs font-medium text-gold-500 flex items-center gap-1 group-hover:underline">
-                  <span>View Agreement</span>
-                  <ExternalLink className="w-3 h-3" />
-                </span>
+                <div className="flex items-center gap-3">
+                  {onOpenMeetingNotes && (
+                    <button
+                      type="button"
+                      onClick={e => {
+                        e.stopPropagation();
+                        onOpenMeetingNotes(ag);
+                      }}
+                      className="text-xs font-medium text-emerald-400 hover:text-emerald-300 flex items-center gap-1 transition-colors cursor-pointer"
+                      title="View meeting notes & minutes for this investment"
+                    >
+                      <MessageSquare className="w-3 h-3" />
+                      <span>
+                        Meeting Notes
+                        {meetings.filter(m => m.agreementNo === ag.agreementNo).length > 0
+                          ? ` (${meetings.filter(m => m.agreementNo === ag.agreementNo).length})`
+                          : ''}
+                      </span>
+                    </button>
+                  )}
+
+                  <span className="text-xs font-medium text-gold-500 flex items-center gap-1 group-hover:underline">
+                    <span>View Agreement</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </span>
+                </div>
               </div>
             </GlassCard>
           );

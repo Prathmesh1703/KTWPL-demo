@@ -14,7 +14,8 @@ import {
   History, 
   FileLock, 
   ChevronLeft, 
-  ChevronRight 
+  ChevronRight,
+  Calendar
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -23,6 +24,7 @@ interface SidebarProps {
   collapsed: boolean;
   setCollapsed: (collapsed: boolean) => void;
   pendingApprovalsCount?: number;
+  pendingMeetingsCount?: number;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -31,28 +33,31 @@ export const Sidebar: React.FC<SidebarProps> = ({
   collapsed,
   setCollapsed,
   pendingApprovalsCount = 0,
+  pendingMeetingsCount = 0,
 }) => {
   const { role } = useAuth();
 
   const investorNav = [
-    { id: 'overview', label: 'Portfolio Overview', icon: PieChart },
+    { id: 'overview', label: 'Overview', icon: PieChart },
     { id: 'simulator', label: 'Wealth and Payout', icon: Calculator },
     { id: 'agreements', label: 'Investments', icon: FileText },
     { id: 'ledger', label: 'General Ledger', icon: ReceiptText },
     { id: 'withdrawals', label: 'Redemptions', icon: ArrowUpRight },
+    { id: 'meetings', label: 'Meetings', icon: Calendar },
   ];
 
   const adminNav = [
-    { id: 'maker-checker', label: 'Authorization Queue', icon: Layers, count: pendingApprovalsCount },
-    { id: 'onboarding', label: 'Inflow Intake', icon: UserPlus },
-    { id: 'liquidity', label: 'Liquidity Forecast (90D)', icon: TrendingUp },
-    { id: 'clients', label: 'Client Mandates', icon: Users },
+    { id: 'maker-checker', label: 'Authorizations', icon: Layers, count: pendingApprovalsCount },
+    { id: 'onboarding', label: 'Inflows', icon: UserPlus },
+    { id: 'liquidity', label: 'Liquidity', icon: TrendingUp },
+    { id: 'clients', label: 'Clients', icon: Users },
+    { id: 'meetings', label: 'Meetings', icon: Calendar, count: pendingMeetingsCount },
   ];
 
   const complianceNav = [
-    { id: 'kyc-matrix', label: 'SEBI / KYC Matrix', icon: ShieldCheck },
-    { id: 'audit-trail', label: 'Immutable Audit Trail', icon: History },
-    { id: 'regulatory', label: 'Regulatory Directives', icon: FileLock },
+    { id: 'kyc-matrix', label: 'KYC Matrix', icon: ShieldCheck },
+    { id: 'audit-trail', label: 'Audit Trail', icon: History },
+    { id: 'regulatory', label: 'Directives', icon: FileLock },
   ];
 
   const currentNav = role === 'investor' 
@@ -63,7 +68,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <aside
-      className={`hidden md:flex flex-col border-r border-subtle bg-surface transition-all duration-200 z-30 shrink-0 select-none ${
+      className={`hidden md:flex flex-col border-r border-subtle bg-surface/85 backdrop-blur-xl transition-all duration-200 z-30 shrink-0 select-none ${
         collapsed ? 'w-16' : 'w-56'
       }`}
     >

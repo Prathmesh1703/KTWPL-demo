@@ -13,13 +13,15 @@ import { AdminDashboard } from './components/admin/AdminDashboard';
 import { ComplianceDashboard } from './components/compliance/ComplianceDashboard';
 import { KTWPLCopilot } from './components/copilot/KTWPLCopilot';
 import { PWAStatusBanner } from './components/pwa/PWAStatusBanner';
+import { Background3D } from './components/common/Background3D';
 import { 
   initialAgreements, 
   initialLedgerEntries, 
   initialWithdrawalRequests, 
   initialInflowProposals, 
   initialKYCRecords, 
-  initialAuditLogs 
+  initialAuditLogs,
+  initialMeetings 
 } from './data/mockData';
 import { 
   Agreement, 
@@ -27,7 +29,8 @@ import {
   WithdrawalRequest, 
   InflowProposal, 
   AuditLog, 
-  KYCRecord 
+  KYCRecord,
+  MeetingRequest 
 } from './types';
 import { Sparkles, MessageSquare } from 'lucide-react';
 
@@ -42,6 +45,7 @@ const MainLayout: React.FC = () => {
   const [inflowProposals, setInflowProposals] = useState<InflowProposal[]>(initialInflowProposals);
   const [kycRecords, setKycRecords] = useState<KYCRecord[]>(initialKYCRecords);
   const [auditLogs, setAuditLogs] = useState<AuditLog[]>(initialAuditLogs);
+  const [meetings, setMeetings] = useState<MeetingRequest[]>(initialMeetings);
 
   // Navigation & UI State
   const [activeTab, setActiveTab] = useState<string>('overview');
@@ -239,6 +243,142 @@ const MainLayout: React.FC = () => {
     setAuditLogs(logs => [audit, ...logs]);
   };
 
+  // --- Handlers for Meetings ---
+  const handleRequestMeeting = (newReq: Partial<MeetingRequest>) => {
+    const meetingNo = `MTG-${Math.floor(8000 + Math.random() * 2000)}`;
+    const fullMeeting: MeetingRequest = {
+      id: `mtg-${Date.now()}`,
+      meetingNo,
+      investorName: 'Arjun Singhania',
+      investorPan: 'AAACS8912P',
+      investorEmail: 'arjun.singhania@apexholding.in',
+      title: newReq.title || 'Institutional Strategy Consultation',
+      agenda: newReq.agenda || 'Portfolio review and yield alignment.',
+      requestedDate: newReq.requestedDate || new Date().toISOString().slice(0, 10),
+      timeSlot: newReq.timeSlot || '11:30 AM - 12:15 PM IST',
+      agreementNo: newReq.agreementNo,
+      status: 'PENDING_ADMIN',
+      requestedAt: new Date().toISOString(),
+    };
+
+    setMeetings(prev => [fullMeeting, ...prev]);
+
+    const audit: AuditLog = {
+      id: `aud-${Date.now()}`,
+      timestamp: new Date().toISOString(),
+      actor: 'Arjun Singhania (Client)',
+      actorRole: 'investor',
+      action: 'MEETING_REQUEST_SUBMITTED',
+      entityType: 'AGREEMENT',
+      entityId: meetingNo,
+      details: `Client scheduled meeting #${meetingNo} for ${fullMeeting.requestedDate} (${fullMeeting.timeSlot})${fullMeeting.agreementNo ? ` linked to Note #${fullMeeting.agreementNo}` : ''}.`,
+      ipAddress: '115.241.10.42 (Client Portal)',
+      sha256Seal: '0x' + Array.from({length: 64}, () => Math.floor(Math.random()*16).toString(16)).join(''),
+    };
+    setAuditLogs(logs => [audit, ...logs]);
+    toast.success('Meeting Request Sent', `Your consultation #${meetingNo} has been queued for admin confirmation.`);
+  };
+
+  const handleAcceptMeeting = (id: string, meetingLink?: string, feedback?: string) => {
+    setMeetings(prev =>
+      prev.map(m => {
+        if (m.id === id) {
+          return {
+            ...m,
+            status: 'CONFIRMED',
+            meetingLink: meetingLink || `https://meet.ktwpl.com/inst-${m.meetingNo.toLowerCase()}`,
+            adminFeedback: feedback || 'Meeting confirmed by Managing Partner. Video room assigned.',
+            adminName: 'Siddharth Khosla (Managing Partner)',
+          };
+        }
+        return m;
+      })
+    );
+
+    const target = meetings.find(m => m.id === id);
+    if (target) {
+      const audit: AuditLog = {
+        id: `aud-${Date.now()}`,
+        timestamp: new Date().toISOString(),
+        actor: 'Siddharth Khosla (Managing Partner)',
+        actorRole: 'admin',
+        action: 'MEETING_CONFIRMED',
+        entityType: 'AGREEMENT',
+        entityId: target.meetingNo,
+        details: `Confirmed meeting #${target.meetingNo} with client ${target.investorName}.`,
+        ipAddress: '192.168.1.105',
+        sha256Seal: '0x' + Array.from({length: 64}, () => Math.floor(Math.random()*16).toString(16)).join(''),
+      };
+      setAuditLogs(logs => [audit, ...logs]);
+    }
+  };
+
+  const handleRejectMeeting = (id: string, reason?: string) => {
+    setMeetings(prev =>
+      prev.map(m => {
+        if (m.id === id) {
+          return {
+            ...m,
+            status: 'REJECTED',
+            adminFeedback: reason || 'Declined due to scheduling constraint.',
+          };
+        }
+        return m;
+      })
+    );
+  };
+
+  const handleRescheduleMeeting = (id: string, newDate: string, newTimeSlot: string, note?: string) => {
+    setMeetings(prev =>
+      prev.map(m => {
+        if (m.id === id) {
+          return {
+            ...m,
+            status: 'RESCHEDULED',
+            rescheduledDate: newDate,
+            rescheduledTimeSlot: newTimeSlot,
+            adminFeedback: note || 'Alternative slot proposed by Admin desk.',
+            adminName: 'Siddharth Khosla (Managing Partner)',
+          };
+        }
+        return m;
+      })
+    );
+  };
+
+  const handleUpdateMeetingNotes = (id: string, notes: string) => {
+    setMeetings(prev =>
+      prev.map(m => {
+        if (m.id === id) {
+          return {
+            ...m,
+            status: 'COMPLETED',
+            meetingNotes: notes,
+            adminName: m.adminName || 'Siddharth Khosla (Managing Partner)',
+          };
+        }
+        return m;
+      })
+    );
+
+    const target = meetings.find(m => m.id === id);
+    if (target) {
+      const audit: AuditLog = {
+        id: `aud-${Date.now()}`,
+        timestamp: new Date().toISOString(),
+        actor: 'Siddharth Khosla (Managing Partner)',
+        actorRole: 'admin',
+        action: 'MEETING_MINUTES_PUBLISHED',
+        entityType: 'AGREEMENT',
+        entityId: target.meetingNo,
+        details: `Published official discussion minutes for meeting #${target.meetingNo} (linked Note: ${target.agreementNo || 'General'}).`,
+        ipAddress: '192.168.1.105',
+        sha256Seal: '0x' + Array.from({length: 64}, () => Math.floor(Math.random()*16).toString(16)).join(''),
+      };
+      setAuditLogs(logs => [audit, ...logs]);
+    }
+  };
+
   // Open Copilot and immediately execute the user's prompt in the chat
   const handleOpenCopilotWithPrompt = (prompt: string) => {
     setPendingCopilotPrompt(prompt);
@@ -266,8 +406,13 @@ const MainLayout: React.FC = () => {
     inflowProposals.filter(i => i.status !== 'APPROVED' && i.status !== 'REJECTED').length +
     withdrawalRequests.filter(w => w.status !== 'DISBURSED' && w.status !== 'REJECTED').length;
 
+  const pendingMeetingsCount = meetings.filter(m => m.status === 'PENDING_ADMIN').length;
+
   return (
-    <div className="min-h-screen flex flex-col bg-canvas text-ink-primary font-sans transition-colors">
+    <div className="min-h-screen flex flex-col bg-canvas text-ink-primary font-sans transition-colors relative selection:bg-gold-500/20">
+      {/* Interactive 3D Ambient Background Element */}
+      <Background3D />
+
       {/* PWA Banner */}
       <PWAStatusBanner />
 
@@ -283,23 +428,26 @@ const MainLayout: React.FC = () => {
       />
 
       {/* Main Workspace Layout */}
-      <div className="flex-1 flex overflow-hidden">
+      <div className="flex-1 flex overflow-hidden relative z-10">
         <Sidebar
           activeTab={activeTab}
           setActiveTab={setActiveTab}
           collapsed={sidebarCollapsed}
           setCollapsed={setSidebarCollapsed}
           pendingApprovalsCount={pendingApprovalsCount}
+          pendingMeetingsCount={pendingMeetingsCount}
         />
 
-        {/* Content Workspace with Proper 28–36px Spacing */}
-        <main className="flex-1 overflow-y-auto px-5 sm:px-8 py-6 max-w-7xl mx-auto w-full">
+        {/* Content Workspace with Proper Edge-to-Edge Desktop & Mobile-First Spacing */}
+        <main className="flex-1 overflow-y-auto px-3.5 sm:px-6 lg:px-8 py-5 sm:py-6 max-w-[1600px] mx-auto w-full">
           {role === 'investor' && (
             <InvestorDashboard
               agreements={agreements}
               ledgerEntries={ledgerEntries}
               withdrawalRequests={withdrawalRequests}
+              meetings={meetings}
               onAddWithdrawalRequest={handleAddWithdrawalRequest}
+              onRequestMeeting={handleRequestMeeting}
               onSimulatorParamChange={(amt) => setSimulatorAmount(amt)}
               activeSubTab={activeTab}
               setActiveTab={setActiveTab}
@@ -311,11 +459,16 @@ const MainLayout: React.FC = () => {
             <AdminDashboard
               inflows={inflowProposals}
               withdrawals={withdrawalRequests}
+              meetings={meetings}
               onApproveInflow={handleApproveInflow}
               onRejectInflow={handleRejectInflow}
               onApproveWithdrawal={handleApproveWithdrawal}
               onRejectWithdrawal={handleRejectWithdrawal}
               onAddInflow={handleAddInflow}
+              onAcceptMeeting={handleAcceptMeeting}
+              onRejectMeeting={handleRejectMeeting}
+              onRescheduleMeeting={handleRescheduleMeeting}
+              onUpdateMeetingNotes={handleUpdateMeetingNotes}
               activeSubTab={activeTab}
               setActiveTab={setActiveTab}
             />

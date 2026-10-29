@@ -1,10 +1,25 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import { useTheme } from '../../context/ThemeContext';
 import { UserRole } from '../../types';
-import { ShieldCheck, Lock, ArrowRight, UserCheck, Briefcase, ShieldAlert } from 'lucide-react';
+import { GlassCard } from '../common/GlassCard';
+import { 
+  ShieldCheck, 
+  Lock, 
+  ArrowRight, 
+  UserCheck, 
+  Briefcase, 
+  ShieldAlert,
+  Sparkles,
+  Layers,
+  CheckCircle2,
+  Sun,
+  Moon
+} from 'lucide-react';
 
 export const LoginPage: React.FC = () => {
   const { login } = useAuth();
+  const { isDark, toggleTheme } = useTheme();
   const [selectedPersona, setSelectedPersona] = useState<UserRole>('investor');
   const [emailInput, setEmailInput] = useState('arjun.singhania@apexholding.in');
   const [passwordInput, setPasswordInput] = useState('••••••••••••');
@@ -31,7 +46,7 @@ export const LoginPage: React.FC = () => {
     setTimeout(() => {
       setIsLoading(false);
       login(selectedPersona);
-    }, 400);
+    }, 350);
   };
 
   useEffect(() => {
@@ -41,13 +56,13 @@ export const LoginPage: React.FC = () => {
     if (!ctx) return;
 
     let animationFrameId: number;
-    let width = (canvas.width = canvas.parentElement?.clientWidth || window.innerWidth / 2);
-    let height = (canvas.height = canvas.parentElement?.clientHeight || window.innerHeight);
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
 
     const handleResize = () => {
-      if (!canvas || !canvas.parentElement) return;
-      width = canvas.width = canvas.parentElement.clientWidth;
-      height = canvas.height = canvas.parentElement.clientHeight;
+      if (!canvas) return;
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
     };
     window.addEventListener('resize', handleResize);
 
@@ -62,13 +77,13 @@ export const LoginPage: React.FC = () => {
 
     const tickerLabels = ['NIFTY +0.58%', 'SENSEX +0.51%', 'KTWPL 14.85%', 'T-BILL 6.51%', 'INR 84.06', 'ESCROW T+0'];
 
-    for (let i = 0; i < 35; i++) {
+    for (let i = 0; i < 40; i++) {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        radius: Math.random() * 1.5 + 0.8,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+        radius: Math.random() * 1.6 + 0.8,
         label: i < tickerLabels.length ? tickerLabels[i] : undefined,
       });
     }
@@ -76,16 +91,17 @@ export const LoginPage: React.FC = () => {
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
 
+      // Draw faint constellation links
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (dist < 100) {
+          if (dist < 110) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(198, 164, 92, ${0.12 * (1 - dist / 100)})`;
-            ctx.lineWidth = 0.6;
+            ctx.strokeStyle = `rgba(198, 164, 92, ${0.12 * (1 - dist / 110)})`;
+            ctx.lineWidth = 0.65;
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
             ctx.stroke();
@@ -93,6 +109,7 @@ export const LoginPage: React.FC = () => {
         }
       }
 
+      // Draw particle nodes
       for (const p of particles) {
         p.x += p.vx;
         p.y += p.vy;
@@ -102,13 +119,13 @@ export const LoginPage: React.FC = () => {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(241, 243, 246, 0.5)';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
         ctx.fill();
 
         if (p.label) {
-          ctx.font = '10px JetBrains Mono, monospace';
-          ctx.fillStyle = 'rgba(148, 163, 184, 0.7)';
-          ctx.fillText(p.label, p.x + 6, p.y + 3);
+          ctx.font = '10px monospace';
+          ctx.fillStyle = 'rgba(148, 163, 184, 0.6)';
+          ctx.fillText(p.label, p.x + 8, p.y + 3);
         }
       }
 
@@ -124,100 +141,71 @@ export const LoginPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen w-full flex flex-col lg:flex-row bg-canvas text-ink-primary overflow-hidden font-sans">
-      {/* Left Column: Brand Hero & Subtle Network Canvas */}
-      <div className="relative w-full lg:w-7/12 flex flex-col justify-between p-8 sm:p-12 lg:p-14 overflow-hidden bg-surface border-r border-subtle">
-        <canvas ref={canvasRef} className="absolute inset-0 z-0 pointer-events-none opacity-60" />
+    <div className="min-h-screen w-full flex items-center justify-center p-4 sm:p-6 lg:p-8 bg-canvas text-ink-primary font-sans relative overflow-hidden select-none">
+      {/* Background 3D Constellation Canvas */}
+      <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-0 opacity-70" />
 
-        {/* Top Header */}
-        <div className="relative z-10 flex items-center justify-between">
+      {/* Ambient 3D Glass Orbs */}
+      <div className="fixed top-1/4 -left-32 w-96 h-96 rounded-full bg-gold-500/5 blur-[120px] pointer-events-none" />
+      <div className="fixed bottom-1/4 -right-32 w-96 h-96 rounded-full bg-emerald-500/5 blur-[120px] pointer-events-none" />
+
+      {/* Centered Minimal Liquid Glass Terminal Container */}
+      <div className="relative z-10 w-full max-w-xl mx-auto space-y-5 animate-fadeIn">
+        {/* Top Minimal Brand Bar */}
+        <div className="flex items-center justify-between px-2">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-elevated border border-subtle flex items-center justify-center">
+            <div className="w-8 h-8 rounded-xl bg-surface border border-subtle flex items-center justify-center shadow-md">
               <span className="text-xs font-bold text-gold-500 font-mono tracking-tighter">KT</span>
             </div>
             <div>
-              <h2 className="text-sm font-semibold tracking-tight text-ink-primary">
-                Khosla Tradewise
-              </h2>
-              <p className="text-[10px] text-ink-muted uppercase font-mono tracking-wider">
-                Private Limited • Capital Management
-              </p>
+              <h2 className="text-sm font-bold text-ink-primary tracking-tight">KTWPL Capital</h2>
+              <p className="text-[10px] text-ink-muted font-mono">Private Wealth Terminal</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-elevated border border-subtle text-ink-secondary text-[11px] font-mono">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-            <span>SEBI REG. INZ00029841</span>
-          </div>
-        </div>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className="p-1.5 rounded-lg bg-surface border border-subtle text-ink-secondary hover:text-ink-primary transition-colors cursor-pointer"
+              title={`Switch to ${isDark ? 'Light' : 'Dark'} Mode`}
+            >
+              {isDark ? <Sun className="w-3.5 h-3.5 text-gold-500" /> : <Moon className="w-3.5 h-3.5 text-ink-primary" />}
+            </button>
 
-        {/* Center Title & Proposition */}
-        <div className="relative z-10 my-auto py-10 max-w-lg">
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-elevated border border-subtle text-xs text-ink-secondary mb-5">
-            <span className="text-[10px] font-mono uppercase text-gold-500">Platform</span>
-            <span>• Institutional Capital Deployment CRM</span>
-          </div>
-
-          <h1 className="text-3xl sm:text-4xl font-semibold text-ink-primary tracking-tight leading-tight mb-4">
-            Predictable Yield.
-            <br />
-            <span className="text-gold-500">Institutional Governance.</span>
-          </h1>
-
-          <p className="text-ink-secondary text-sm leading-relaxed mb-8">
-            Empowering family offices, high-net-worth investors, and treasury desks with automated 
-            monthly payouts, cryptographic digital agreements, and SEBI-grade compliance surveillance.
-          </p>
-
-          {/* Metrics */}
-          <div className="grid grid-cols-3 gap-4 pt-5 border-t border-subtle">
-            <div>
-              <div className="text-[11px] text-ink-muted">Assets Under Mandate</div>
-              <div className="text-xl font-semibold text-ink-primary font-mono mt-0.5 tabular-nums">₹428.5 Cr</div>
-            </div>
-            <div>
-              <div className="text-[11px] text-ink-muted">Weighted Coupon Yield</div>
-              <div className="text-xl font-semibold text-emerald-500 font-mono mt-0.5 tabular-nums">14.85% p.a.</div>
-            </div>
-            <div>
-              <div className="text-[11px] text-ink-muted">Settlement Speed</div>
-              <div className="text-xl font-semibold text-ink-primary font-mono mt-0.5">T+0 Escrow</div>
+            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface border border-subtle text-[11px] font-mono text-ink-secondary">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span>SEBI INZ00029841</span>
             </div>
           </div>
         </div>
 
-        {/* Bottom Certifications */}
-        <div className="relative z-10 flex flex-wrap items-center gap-6 text-[11px] text-ink-muted pt-4 border-t border-subtle">
-          <span className="flex items-center gap-1.5">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" /> 2048-Bit DSC Encryption
-          </span>
-          <span className="flex items-center gap-1.5">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" /> CKYC & Aadhaar eSign
-          </span>
-          <span className="flex items-center gap-1.5">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" /> Segregated Commercial Escrow
-          </span>
-        </div>
-      </div>
+        {/* Central Liquid Glass Login Card */}
+        <GlassCard variant="liquid" enableTilt={true} className="p-7 sm:p-9 shadow-2xl">
+          <div className="text-center max-w-md mx-auto mb-6">
+            <h1 className="text-2xl sm:text-3xl font-bold text-ink-primary tracking-tight leading-tight">
+              Predictable Yield. <span className="text-gold-500">Institutional Safety.</span>
+            </h1>
+            <p className="text-xs text-ink-secondary mt-1.5 leading-relaxed">
+              Institutional capital management with T+0 bank escrow and continuous SEBI surveillance.
+            </p>
+          </div>
 
-      {/* Right Column: Split Screen Login with Quick Persona Switcher */}
-      <div className="w-full lg:w-5/12 flex flex-col justify-center p-8 sm:p-12 bg-canvas">
-        <div className="max-w-sm w-full mx-auto space-y-6">
-          {/* Quick Persona Switcher */}
-          <div>
-            <div className="text-[10px] uppercase font-mono tracking-wider text-ink-muted mb-2 flex items-center justify-between">
-              <span>Demo Persona Selector</span>
-              <span className="text-gold-500">Instant Switch</span>
+          {/* Quick Demo Persona Switcher (Segmented Liquid Glass Control) */}
+          <div className="mb-6">
+            <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-ink-muted mb-2 px-1">
+              <span>Select Access Persona</span>
+              <span className="text-gold-500">Instant One-Click</span>
             </div>
 
-            <div className="grid grid-cols-3 gap-1.5 p-1 rounded-lg bg-card border border-subtle">
+            <div className="grid grid-cols-3 gap-1.5 p-1 rounded-xl bg-surface/90 border border-subtle backdrop-blur-md">
               <button
                 type="button"
                 onClick={() => handleSelectPersona('investor')}
-                className={`flex flex-col items-center gap-1 py-2 px-1 rounded-md text-xs transition-colors ${
+                className={`flex items-center justify-center gap-2 py-2 px-2 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                   selectedPersona === 'investor'
-                    ? 'bg-elevated text-gold-500 font-medium border border-subtle'
-                    : 'text-ink-muted hover:text-ink-secondary'
+                    ? 'bg-gold-500 text-[#080B12] font-semibold shadow-md'
+                    : 'text-ink-secondary hover:text-ink-primary hover:bg-elevated'
                 }`}
               >
                 <UserCheck className="w-3.5 h-3.5" />
@@ -227,10 +215,10 @@ export const LoginPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => handleSelectPersona('admin')}
-                className={`flex flex-col items-center gap-1 py-2 px-1 rounded-md text-xs transition-colors ${
+                className={`flex items-center justify-center gap-2 py-2 px-2 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                   selectedPersona === 'admin'
-                    ? 'bg-elevated text-gold-500 font-medium border border-subtle'
-                    : 'text-ink-muted hover:text-ink-secondary'
+                    ? 'bg-gold-500 text-[#080B12] font-semibold shadow-md'
+                    : 'text-ink-secondary hover:text-ink-primary hover:bg-elevated'
                 }`}
               >
                 <Briefcase className="w-3.5 h-3.5" />
@@ -240,10 +228,10 @@ export const LoginPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => handleSelectPersona('compliance')}
-                className={`flex flex-col items-center gap-1 py-2 px-1 rounded-md text-xs transition-colors ${
+                className={`flex items-center justify-center gap-2 py-2 px-2 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                   selectedPersona === 'compliance'
-                    ? 'bg-elevated text-gold-500 font-medium border border-subtle'
-                    : 'text-ink-muted hover:text-ink-secondary'
+                    ? 'bg-gold-500 text-[#080B12] font-semibold shadow-md'
+                    : 'text-ink-secondary hover:text-ink-primary hover:bg-elevated'
                 }`}
               >
                 <ShieldAlert className="w-3.5 h-3.5" />
@@ -252,79 +240,73 @@ export const LoginPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Form */}
-          <div className="p-6 rounded-xl bg-card border border-card shadow-sm">
-            <h3 className="text-base font-semibold text-ink-primary mb-1">
-              Institutional Single Sign-On
-            </h3>
-            <p className="text-xs text-ink-muted mb-5">
-              Enter credentials or proceed directly with the selected role.
-            </p>
+          {/* Credential Form */}
+          <form onSubmit={handleLogin} className="space-y-4">
+            <div>
+              <label className="block text-xs text-ink-secondary font-medium mb-1.5 px-0.5">
+                Corporate / Registered Email
+              </label>
+              <input
+                type="email"
+                value={emailInput}
+                onChange={e => setEmailInput(e.target.value)}
+                className="w-full px-3.5 py-2.5 rounded-xl bg-surface border border-subtle text-ink-primary text-xs font-mono focus:outline-none focus:border-gold-500 focus:bg-elevated transition-all"
+                required
+              />
+            </div>
 
-            <form onSubmit={handleLogin} className="space-y-4">
-              <div>
-                <label className="block text-xs text-ink-secondary font-medium mb-1">
-                  Corporate / Registered Email
+            <div>
+              <div className="flex items-center justify-between mb-1.5 px-0.5">
+                <label className="text-xs text-ink-secondary font-medium">
+                  Security Passkey / DSC Seal
                 </label>
+                <span className="text-[10px] text-emerald-500 font-mono flex items-center gap-1">
+                  <CheckCircle2 className="w-3 h-3" />
+                  eMudhra Class 3
+                </span>
+              </div>
+              <div className="relative">
                 <input
-                  type="email"
-                  value={emailInput}
-                  onChange={e => setEmailInput(e.target.value)}
-                  className="w-full px-3 py-2 rounded-lg bg-surface border border-subtle text-ink-primary text-xs font-mono focus:outline-none focus:border-gold-500/50"
+                  type="password"
+                  value={passwordInput}
+                  onChange={e => setPasswordInput(e.target.value)}
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-surface border border-subtle text-ink-primary font-mono text-xs tracking-widest focus:outline-none focus:border-gold-500 focus:bg-elevated transition-all"
                   required
                 />
+                <Lock className="w-3.5 h-3.5 text-ink-muted absolute right-3.5 top-3" />
               </div>
+            </div>
 
-              <div>
-                <div className="flex items-center justify-between mb-1">
-                  <label className="text-xs text-ink-secondary font-medium">
-                    Security Passkey / DSC
-                  </label>
-                  <span className="text-[11px] text-ink-muted">
-                    eMudhra DSC
+            <div className="flex items-center justify-between text-xs text-ink-secondary pt-1 px-0.5">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input 
+                  type="checkbox" 
+                  defaultChecked 
+                  className="rounded bg-surface border-subtle text-gold-500 focus:ring-0" 
+                />
+                <span className="text-[11px]">Remember authorized terminal</span>
+              </label>
+              <span className="text-emerald-500 font-mono text-[11px]">2FA Active</span>
+            </div>
+
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full mt-3 py-3 rounded-xl bg-gold-500 hover:bg-gold-600 text-[#080B12] font-bold text-xs tracking-wide flex items-center justify-center gap-2 transition-all disabled:opacity-60 shadow-lg shadow-gold-500/20 cursor-pointer"
+            >
+              {isLoading ? (
+                <div className="w-4 h-4 border-2 border-[#080B12] border-t-transparent rounded-full animate-spin" />
+              ) : (
+                <>
+                  <span>
+                    Enter {selectedPersona === 'investor' ? 'Investor Portal' : selectedPersona === 'admin' ? 'Operations Desk' : 'Compliance Terminal'}
                   </span>
-                </div>
-                <div className="relative">
-                  <input
-                    type="password"
-                    value={passwordInput}
-                    onChange={e => setPasswordInput(e.target.value)}
-                    className="w-full px-3 py-2 rounded-lg bg-surface border border-subtle text-ink-primary font-mono text-xs tracking-widest focus:outline-none focus:border-gold-500/50"
-                    required
-                  />
-                  <Lock className="w-3.5 h-3.5 text-ink-muted absolute right-3 top-2.5" />
-                </div>
-              </div>
-
-              <div className="flex items-center justify-between text-xs text-ink-muted pt-1">
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input type="checkbox" defaultChecked className="rounded bg-surface border-subtle text-gold-500 focus:ring-0" />
-                  <span>Remember terminal</span>
-                </label>
-                <span className="text-emerald-500 font-mono text-[11px]">2FA Active</span>
-              </div>
-
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="w-full mt-2 py-2.5 rounded-lg bg-gold-500 hover:bg-gold-600 text-[#080B12] font-semibold text-xs tracking-normal flex items-center justify-center gap-1.5 transition-colors disabled:opacity-60 shadow-sm"
-              >
-                {isLoading ? (
-                  <div className="w-4 h-4 border-2 border-[#080B12] border-t-transparent rounded-full animate-spin" />
-                ) : (
-                  <>
-                    <span>Enter {selectedPersona === 'investor' ? 'Investor Portal' : selectedPersona === 'admin' ? 'Operations Desk' : 'Compliance Terminal'}</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </>
-                )}
-              </button>
-            </form>
-          </div>
-
-          <p className="text-[10px] text-ink-muted text-center">
-            Protected by Cloudflare Magic Transit & Hardware Security Modules (HSM).
-          </p>
-        </div>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </>
+              )}
+            </button>
+          </form>
+        </GlassCard>
       </div>
     </div>
   );

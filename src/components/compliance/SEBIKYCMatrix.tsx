@@ -29,14 +29,14 @@ export const SEBIKYCMatrix: React.FC<SEBIKYCMatrixProps> = ({ records }) => {
   });
 
   return (
-    <GlassCard className="p-6">
+    <GlassCard variant="liquid" enableTilt={false} className="p-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-5 border-b border-subtle">
         <div>
-          <h3 className="text-base font-semibold text-ink-primary tracking-tight flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-emerald-500" />
-            SEBI CKYC & Client Verification Matrix
+          <h3 className="text-base font-bold text-white tracking-tight flex items-center gap-2 font-sans">
+            <ShieldCheck className="w-4 h-4 text-emerald-400" />
+            CKYC & Verification Matrix
           </h3>
-          <p className="text-xs text-ink-secondary mt-0.5">
+          <p className="text-xs text-slate-300 mt-0.5 font-sans">
             Automated verification against Central KYC registry, UIDAI PAN-Aadhaar links, and NPCI penny-drop.
           </p>
         </div>

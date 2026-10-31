@@ -35,7 +35,7 @@ import {
 import { Sparkles, MessageSquare } from 'lucide-react';
 
 const MainLayout: React.FC = () => {
-  const { role, isAuthenticated, switchRole } = useAuth();
+  const { role, isAuthenticated } = useAuth();
   const { toast } = useToast();
 
   // Primary State Data
@@ -396,8 +396,8 @@ const MainLayout: React.FC = () => {
       setActiveTab('ledger');
       setIsCopilotOpen(false);
     } else if (actionType === 'NAVIGATE') {
-      if (payload === 'admin') switchRole('admin');
-      if (payload === 'compliance') switchRole('compliance');
+      if (payload === 'admin' && role === 'admin') setActiveTab('maker-checker');
+      if (payload === 'compliance' && role === 'compliance') setActiveTab('kyc-matrix');
       setIsCopilotOpen(false);
     }
   };

@@ -158,8 +158,8 @@ export const LoginPage: React.FC = () => {
               <span className="text-xs font-bold text-gold-500 font-mono tracking-tighter">KT</span>
             </div>
             <div>
-              <h2 className="text-sm font-bold text-ink-primary tracking-tight">KTWPL Capital</h2>
-              <p className="text-[10px] text-ink-muted font-mono">Private Wealth Terminal</p>
+              <h2 className="text-sm font-bold text-ink-primary tracking-tight">KTWPL</h2>
+              <p className="text-[10px] text-ink-muted font-mono">Capital CRM</p>
             </div>
           </div>
 
@@ -183,11 +183,11 @@ export const LoginPage: React.FC = () => {
         {/* Central Liquid Glass Login Card */}
         <GlassCard variant="liquid" enableTilt={true} className="p-7 sm:p-9 shadow-2xl">
           <div className="text-center max-w-md mx-auto mb-6">
-            <h1 className="text-2xl sm:text-3xl font-bold text-ink-primary tracking-tight leading-tight">
-              Predictable Yield. <span className="text-gold-500">Institutional Safety.</span>
+            <h1 className="text-2xl sm:text-3xl font-bold text-ink-primary tracking-tight">
+              Khosla Tradewise
             </h1>
-            <p className="text-xs text-ink-secondary mt-1.5 leading-relaxed">
-              Institutional capital management with T+0 bank escrow and continuous SEBI surveillance.
+            <p className="text-xs text-ink-muted mt-1">
+              Private Limited
             </p>
           </div>
 
